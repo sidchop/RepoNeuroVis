@@ -3,3 +3,6 @@
 .RData
 .Ruserdata
 coauthor_feedback
+*.tex
+*.log
+*.html
