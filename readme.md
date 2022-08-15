@@ -38,6 +38,64 @@ region-of-interest, and edge level data..
 
 ------------------------------------------------------------------------
 
+## Examples of code-based neuroimaging visualizations tools that can be accessed directly within R, MATLAB and Python environments.
+
+|                                                        | Voxel   | Vertex  | ROI       | Edge    | Streamlines |
+|:-------------------------------------------------------|:--------|:--------|:----------|:--------|:------------|
+| **R**                                                  |         |         |           |         |             |
+| [ANTsR](https://github.com/ANTsX/ANTsR)                | ***+*** | ***+*** | ***+***   |         |             |
+| [brainconn](https://github.com/sidchop/brainconn)      |         |         |           | ***+*** |             |
+| [brainR](https://github.com/muschellij2/brainR)        | ***+*** |         | ***+***   |         |             |
+| [ciftitools](https://github.com/mandymejia/ciftiTools) | ***+*** | ***+*** | ***+*\*** |         |             |
+| [fsbrain](https://github.com/dfsp-spirit/fsbrain)      | ***+*** | ***+*** | ***+*\*** |         |             |
+| ggseg                                                  |         |         | ***+***   |         |             |
+| neurobase                                              | ***+*** |         |           |         |             |
+| oro.nifti                                              | ***+*** |         |           |         |             |
+| **Python**                                             |         |         |           |         |             |
+| ANTsPy                                                 | ***+*** | ***+*** | ***+***   |         |             |
+| brainiak                                               | ***+*** |         |           |         |             |
+| Brainplotlib                                           |         | ***+*** | ***+*\*** |         |             |
+| Brainspace/surfplot                                    |         | ***+*** | ***+*\*** |         |             |
+| DIPY                                                   | ***+*** |         |           |         | ***+***     |
+| ENIGMA toolbox                                         |         |         | ***+***   |         |             |
+| FSLeyes                                                | ***+*** | ***+*** | ***+***   |         |             |
+| ggseg                                                  |         |         | ***+***   |         |             |
+| graphpype                                              |         |         |           | ***+*** |             |
+| MMVT                                                   |         | ***+*** | ***+***   | ***+*** |             |
+| MNE                                                    | ***+*** | ***+*** | ***+***   |         |             |
+| mrivis                                                 | ***+*** |         |           |         |             |
+| NaNSlice                                               | ***+*** |         |           |         |             |
+| netneurotools                                          |         | ***+*** | ***+*\*** |         |             |
+| nilearn                                                | ***+*** | ***+*** | ***+***   | ***+*** |             |
+| niwidget                                               | ***+*** | ***+*** |           |         | ***+***     |
+| Pycortex                                               | ***+*** | ***+*** | ***+*\*** |         |             |
+| pySurfer                                               |         | ***+*** | ***+*\*** |         |             |
+| surfice                                                | ***+*** | ***+*** | ***+***   | ***+*** | ***+***     |
+| surfplot                                               |         | ***+*** | ***+***   |         |             |
+| Visbrain                                               | ***+*** | ***+*** | ***+***   | ***+*** |             |
+| **MATLAB**                                             |         |         |           |         |             |
+| BrainNetViewer                                         | ***+*** |         | ***+***   | ***+*** |             |
+| Brainspace                                             |         | ***+*** | ***+*\*** |         |             |
+| Brainstorm                                             | ***+*** | ***+*** | ***+***   |         |             |
+| bspmview                                               | ***+*** |         | ***+***   |         |             |
+| CandlabCore                                            | ***+*** |         | ***+***   |         |             |
+| ECoG/fMRI Vis toolbox                                  |         | ***+*** | ***+*\*** |         |             |
+| ENIGMA toolbox                                         |         |         | ***+***   |         |             |
+| FieldTrip                                              | ***+*** | ***+*** |           |         |             |
+| Lead-DBS                                               | ***+*** |         | ***+***   |         |             |
+| mni2fs                                                 |         | ***+*** |           |         |             |
+| mrtools                                                | ***+*** | ***+*** | ***+*\*** |         |             |
+| plotSurfaceROIBoundary                                 |         | ***+*** | ***+*\*** |         |             |
+| Vistasoft                                              | ***+*** | ***+*** | ***+***   |         | ***+***     |
+
+Note: The tools listed contain functionality required to generate (at
+least close-to) publication-ready neuroimaging figures via user-entered
+code within R, MATLAB and Python environments. This list does not
+include cross-platform general purpose visualization software.  
+\*Cortex only
+
+------------------------------------------------------------------------
+
 ## Questions
 
 Please contact me (Sidhant Chopra) as <sidhant.chopra@yale.edu> and/or
