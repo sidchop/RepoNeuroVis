@@ -3,10 +3,10 @@ Reproducible and Programmatic Generation of Neuroimaging Visualizations
 
 ## Reference
 
-3.  Chopra, S., Labache, L., Dhamala, E., Orchard, E., Holmes. A.
-    [Reproducible and programmatic generation of neuroimaging
-    visualizatio](https://github.com/sidchop/RepoNeuroVis/blob/main/manuscript.pdf).
-    Preprint.
+**Chopra, S.**, Labache, L., Dhamala, E., Orchard, E., Holmes. A.
+[Reproducible and programmatic generation of neuroimaging
+visualizatio](https://github.com/sidchop/RepoNeuroVis/blob/main/manuscript.pdf).
+Preprint.
 
 ------------------------------------------------------------------------
 
