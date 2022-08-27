@@ -54,9 +54,9 @@ knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
 
 # Introduction
 
-The visualization of neuroimaging data is one of the primary ways in which we evaluate data quality, interpret results, and communicate findings. These visualizations are commonly produced using graphical user interface-based (GUI) tools where individual images are opened and, within each instance, display settings are manually changed until the desired output is reached. In large part, the choice to use GUI-based software has been driven by a perception of convenience, flexibility, and accessibility. However, there now exists many code-based software packages which are well-documented and often do not require high-level knowledge of programming, making them more accessible to the neuroimaging community (Table 1). These tools are flexible and allow for the generation of reproducible, high-quality, and publication-ready brain visualizations in only a few lines of code (Figure 1), especially within the R, Python and MATLAB environments.
+The visualization of neuroimaging data is one of the primary ways in which we evaluate data quality, interpret results, and communicate findings. These visualizations are commonly produced using graphical user interface-based (GUI) tools where individual images are opened and, within each instance, display settings are manually changed until the desired output is reached. In large part, the choice to use GUI-based software has been driven by a perception of convenience, flexibility, and accessibility. However, there now exists many code-based software packages which are well-documented and often do not require high-level knowledge of programming, making them more accessible to the neuroimaging community (Table 1). These tools are flexible and allow for the generation of reproducible, high-quality, and publication-ready brain visualizations in only a few lines of code (Figure 1), especially within the R, Python and MATLAB environments. The present article argues for the wide-spread adoption of code-generated visualizations by highlighting major advantages in replicability, flexibility, and integration over GUI based tools. We also providing didactic examples of visualizations and associated code as a reference point.
 
-The present article covers three major advantages of using code-generated visualizations over GUI based tools: replicability, flexibility, and integration. First, by generating visualizations using code, you increase the replicability of your figures for yourself, your collaborators and your readers. Second, code-based tools provides more precise controls over display settings, while also benefiting from the advantages of programming, such as the ability to iteratively and rapidly generate multiple figures. Finally, being able to integrate figure generation into your analysis scripts reduces chances of errors and increases the accessibility of resulting analyses pipeline, with more advanced tools now allowing for the seamless integration of prose and code. Here, we review the advantages of learning and using programmatic neuroimaging visualizations, focusing on benefits to replicability, flexibility and integration. We conclude by introducing examples of R-packages which allow for visualization of statistics at region-of-interest (ROI), voxel, vertex, and edge level data, followed by a brief discussion of limitations and functionality gaps in code-based brain visualization tools.
+In brief, by generating visualizations using code, you increase the replicability of your figures for yourself, your collaborators and your readers. Moreover, code-based tools provides more precise controls over display settings, while also benefiting from the advantages of programming, such as the ability to iteratively and rapidly generate multiple figures. Finally, being able to integrate figure generation into your analysis scripts reduces chances of errors and increases the accessibility of resulting analyses pipeline, with more advanced tools now allowing for the seamless integration of prose and code. Here, we review the advantages of learning and using programmatic neuroimaging visualizations, focusing on benefits to replicability, flexibility and integration. We conclude by introducing examples of R-packages which allow for visualization of statistics at region-of-interest (ROI), voxel, vertex, and edge level data, followed by a brief discussion of limitations and functionality gaps in code-based brain visualization tools.
 
 # Replicability
 
@@ -103,7 +103,7 @@ Neuroimaging data are often spatially 3D and can have multiple time points, addi
 | Brainspace/surfplot                                    |         | ***+*** | ***+*****\*** |         |             |
 | DIPY                                                   | ***+*** |         |               |         | ***+***     |
 | ENIGMA toolbox                                         |         |         | ***+***       |         |             |
-| FSLeyes                                                | ***+*** | ***+*** | ***+***       |         |             |
+| FSLeyes                                                | ***+*** | ***+*** | ***+***       |         | *+*         |
 | ggseg                                                  |         |         | ***+***       |         |             |
 | graphpype                                              |         |         |               | ***+*** |             |
 | MMVT                                                   |         | ***+*** | ***+***       | ***+*** |             |
@@ -138,7 +138,7 @@ Note: The tools listed contain functionality required to generate (at least clos
 
 # Examples of Neuroimaging Visualization Packages available in *R and Python*
 
-The following four sections provide brief examples of packages and functions available in R and Python for visualizing voxel, vertex, ROI and edge-level data. This is not an exhaustive list of packages available for visualizing brain data in R and Python, rather, the following sections aim to give the reader a sense of the available options, and an entry point to using them. A didactic introduction to the R based tools is provided in an accompanying [collection of beginner friendly R-Notebooks](https://github.com/sidchop/neuRo-vis-BrainHack-2021).
+The following four sections provide brief examples of well documented and beginner friendly packages and functions available in R and Python for visualizing voxel, vertex, ROI and edge-level data. This is not an exhaustive list of packages available for visualizing brain data in R and Python (See Table 1), rather, the following sections aim to give the reader a sense of the available options, and an entry point to using them. All code used to compile the figures, as well as the contents of each panel are provided in the Supplement or can be accessed in the accompanying Git repository.
 
 ```{=tex}
 \newpage
@@ -182,7 +182,7 @@ patchwork + plot_annotation(tag_levels = 'A',
 \newpage
 \blandscape
 ```
-```{r Figure2 , echo=FALSE, out.height = '80%', out.width = '80%', fig.align='center'}
+```{r Figure2 , echo=FALSE, out.height = '80%', out.width = '80%', fig.align='center', eval=FALSE}
 
 library(patchwork)
 library(ggplot2)
@@ -207,7 +207,7 @@ patchwork2 <- (figs[[1]]+figs[[3]])/figs[[2]] | (figs[[6]]/figs[[4]]/figs[[5]])
 
 
 patchwork + plot_annotation(tag_levels = 'A',
-                            title = 'Examples of brain visualizations made in Pythoin') &
+                            title = 'Examples of brain visualizations made in Python') &
     theme(plot.tag = element_text(face = 'bold'),
           plot.title = element_text(face="bold"))
 
@@ -222,21 +222,29 @@ patchwork + plot_annotation(tag_levels = 'A',
 
 ## Voxel-Level Visualizations.
 
-The `oro.nifti` and `neurobase` packages allow for the reading, writing, manipulation and visualization of voxel-level imaging data of either *nifti*, *analyze* or *afni* formats. In particular, the `image`, `slice` and `ortho2` functions allow users to display the desired number of slices in the desired orientations, while also providing precise control over overlaid images, color scales, legend placement and other aesthetic settings (Fig 1A-B). Smoothing and re-sampling of images is sometimes required for visualization purposes, which can be achieved via the `ANTsR` or `fslr` packages.
+**R.** The `oro.nifti` and `neurobase` packages allow for the reading, writing, manipulation and visualization of voxel-level imaging data of either *nifti*, *analyze* or *afni* formats. In particular, the `image`, `slice` and `ortho2` functions allow users to display the desired number of slices in the desired orientations, while also providing precise control over overlaid images, color scales, legend placement and other aesthetic settings (Fig 1A-B). Smoothing and re-sampling of images is sometimes required for visualization purposes, which can be achieved via the `ANTsR` or `fslr` packages.
+
+**Python.** The `NiBable` library provides the ability to read in and covert many common neuroimaging file formats, including *nifti,* to data-structures which can be manipulated and visualized. While these data-structures often form 3D or 4D matrices, so can be visualized using commonly used general purpose visualization tools such as `matplotlib` , purpose built librires like `nilearn` provide functions like `plot_stat_map` and `plot_glass_brain` which are user friendly and can generate publication ready figures (Fig. X). `nilearn` also includes smoothing and re-sampling functions which can sometimes required for visualization purposes.
 
 ## Vertex-Level Visualizations.
 
-The recently developed `fsbrain` package allows for the visualization of vertex-level and cortical ROI-level data which were derived using *FreeSurfer*. The package contains many flexible functions for visualizing individual-level and group-level measures such as cortical thickness, volume or surface area (Fig 1F). In addition to producing publication-ready figures, the visualization functions can allow for visual quality control of large datasets processed using FreeSurfer. The package also comes with extensive guides and documentations to assist users (Schäfer & Ecker, 2020).
+**R.** The recently developed `fsbrain` package allows for the visualization of vertex-level and cortical ROI-level data which were derived using *FreeSurfer*. The package contains many flexible functions for visualizing individual-level and group-level measures such as cortical thickness, volume or surface area (Fig 1F). In addition to producing publication-ready figures, the visualization functions can allow for visual quality control of large datasets processed using FreeSurfer. The package also comes with extensive guides and documentations to assist users (Schäfer & Ecker, 2020).
 
 CIFTI or 'grey-ordinate' data is becoming a popular format for structural and functional imaging data, as it combines vertex-level data of the cortex with voxel-level data for the cerebellum and sub-cortex. In R, CIFTI data can now be read, visualized and manipulated using the well-documented `ciftiTools` package (Fig 1C,1G; Pham, Muschelli, & Mejia, 2022). This package allows for both vertex-level visualization of the surface as well as voxel-level visualization of cerebellum and subcortex.
 
+**Python.** ciftify.
+
 ## ROI-Level Visualizations.
 
-Statistical parameters can be mapped onto discreet cortical and sub-cortical regions using the `ggseg` and `ggseg3d` packages (Mowinckel & Vidal-Piñeiro, 2020). These packages flexibly generates aesthetic renderings of cortical, sub-cortical and white matter ROIs in 2D (Fig 1D,1F) and 3D (Fig 1E). Usually, ROI-level interpretations are dependent on a standardized atlas or parcellation scheme of the brain and accordingly, this package and its sister-packages (`ggsegExtra`) provide a large array of commonly used atlases and some functionality for users to contribute other atlases. Additionally, being part of the 'Grammar of Graphics' framework (Wickham, 2016) allows for integration with packages such as `gganimate`, enabling users to animate and visualize dynamic changes in spatial and temporal statistics across ROIs. Notably, the `ciftiTools` package also provides functions to visualize surface and voxel-level ROIs for the cortex and sub-cortex respectively (Fig 1E), flexibly allowing CIFTI format atlases and ROIs to be displayed.
+**R.** Statistical parameters can be mapped onto discreet cortical and sub-cortical regions using the `ggseg` and `ggseg3d` packages (Mowinckel & Vidal-Piñeiro, 2020). These packages flexibly generates aesthetic renderings of cortical, sub-cortical and white matter ROIs in 2D (Fig 1D,1F) and 3D (Fig 1E). Usually, ROI-level interpretations are dependent on a standardized atlas or parcellation scheme of the brain and accordingly, this package and its sister-packages (`ggsegExtra`) provide a large array of commonly used atlases and some functionality for users to contribute other atlases. Additionally, being part of the 'Grammar of Graphics' framework (Wickham, 2016) allows for integration with packages such as `gganimate`, enabling users to animate and visualize dynamic changes in spatial and temporal statistics across ROIs. Notably, the `ciftiTools` package also provides functions to visualize surface and voxel-level ROIs for the cortex and sub-cortex respectively (Fig 1E), flexibly allowing CIFTI format atlases and ROIs to be displayed.
+
+**Python.**
 
 ## Edge-Level Visualizations.
 
 Analyses which divide the brain into discrete regions and examine pair-wise dependencies between regional phenotypes are becoming increasingly common. Often the results of these dependency analyses are statistics relating to 'edges' or links between any two regions. The package `brainconn` allows users to plot brain regions as nodes of a network graph, and dependencies between regions as edges of that graph, following a standardized coordinate space in both 2D and interactive 3D (Figure 1I). The graphs can be weighted, with the strength of the edges represented with color or line thickness, as well as directed, where arrows will be used in place of edges. This package comes with node coordinates corresponding to multiple commonly used atlases and contains functionality for users to easily enter their own custom atlas coordinates.
+
+**Python.**
 
 # Limitations and Functionality Gaps
 
@@ -572,7 +580,10 @@ make_ggseg3d <- function(attribute,
                          output.png=FALSE, 
                          file.name="ggseg_3d.png") {
   # Inputs: 
-  #' attribute = This must be a numeric vector in this: Left-Thalamus, Left-Caudate, Left-Putamen, Left-Pallidum Left-Hippocampus, Left-Amygdala, Left-Accumbens-area, Right-Thalamus-Proper, Right-Caudate, Right-Putamen, Right-Pallidum, Right-Hippocampus, Right-Amygdala, Right-Accumbens-area
+  #' attribute = This must be a numeric vector in this: Left-Thalamus, Left-Caudate, Left
+  #' -Putamen, Left-Pallidum Left-Hippocampus, Left-Amygdala, Left-Accumbens-area, Righ
+  #' t-Thalamus-Proper, Right-Caudate, Right-Putamen, Right-Pallidum, Right-Hippocampus, Righ
+  #' t-Amygdala, Right-Accumbens-area
   
   library(ggseg3d)
   library(tidyr)
