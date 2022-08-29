@@ -1,5 +1,5 @@
 ---
-title: Reproducible and Programmatic Generation of Neuroimaging Visualizations
+title: Moving Towards Reproducible and Programmatic Generation of Neuroimaging Visualizations
 authors:
   - name: Sidhant Chopra
     thanks: Corresponding author
@@ -31,7 +31,7 @@ keywords:
   - R
   - Python
   - Brain Visualization
-abstract: Neuroimaging visualization forms the centrepiece of quality control, and interpretation and communication of results. Often, these images and figures are produced by manually changing settings on Graphical User Interfaces (GUI). There now exist many well-documented code-based brain visualisation tools that allow users to programmatically generate publication-ready figures directly within environments such as R, Python and MATLAB. Compared to figures generated using GUIs, programmatic tools are more replicable, flexible, interactive, and integrated with the scientific process. This article reviews the advantages of learning and using programmatic neuroimaging visualization tools and provides a list of tools across programming environments. Finally, we introduce examples of specific R and Python tools for visualization of voxel, vertex, region-of-interest, and edge level data.
+abstract: Neuroimaging visualization forms the centerpiece of quality control, and interpretation and communication of results. Often, these images and figures are produced by manually changing settings on Graphical User Interfaces (GUI). There now exist many well-documented code-based brain visualization tools that allow users to programmatically generate publication-ready figures directly within environments such as R, Python and MATLAB. Compared to figures generated using GUIs, programmatic tools are more replicable, flexible, interactive, and integrated with the scientific process. Here we outline the advantages of learning and using programmatic neuroimaging visualization tools, include a list of these tools across programming environments and give examples of code and visualizations at the voxel, vertex, region-of-interest, and edge-level data.
 
 output: 
   bookdown::pdf_book:
@@ -54,13 +54,13 @@ knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
 
 # Introduction
 
-The visualization of neuroimaging data is one of the primary ways in which we evaluate data quality, interpret results, and communicate findings. These visualizations are commonly produced using graphical user interface-based (GUI) tools where individual images are opened and, within each instance, display settings are manually changed until the desired output is reached. In large part, the choice to use GUI-based software has been driven by a perception of convenience, flexibility, and accessibility. However, there now exists many code-based software packages which are well-documented and often do not require high-level knowledge of programming, making them more accessible to the neuroimaging community (Table 1). These tools are flexible and allow for the generation of reproducible, high-quality, and publication-ready brain visualizations in only a few lines of code (Figure 1), especially within the R, Python and MATLAB environments. The present article argues for the wide-spread adoption of code-generated visualizations by highlighting major advantages in replicability, flexibility, and integration over GUI based tools. We also providing didactic examples of visualizations and associated code as a reference point.
+The visualization of neuroimaging data is one of the primary ways in which we evaluate data quality, interpret results, and communicate findings. These visualizations are commonly produced using graphical user interface-based (GUI) tools where individual images are opened and, within each instance, display settings are manually changed until the desired output is reached. In large part, the choice to use GUI-based software has been driven by a perception of convenience, flexibility, and accessibility. However, there now exist many code-based software packages which are well-documented and often do not require high-level knowledge of programming, making them more accessible to the neuroimaging community (Table 1). These tools are flexible and allow for the generation of reproducible, high-quality, and publication-ready brain visualizations in only a few lines of code (Figure 1), especially within the R, Python and MATLAB environments. The present commentary argues for the wide-spread adoption of code-generated visualizations by highlighting major advantages in replicability, flexibility, and integration over GUI based tools. We also providing didactic examples of visualizations and associated code as a reference point.
 
 In brief, by generating visualizations using code, you increase the replicability of your figures for yourself, your collaborators and your readers. Moreover, code-based tools provides more precise controls over display settings, while also benefiting from the advantages of programming, such as the ability to iteratively and rapidly generate multiple figures. Finally, being able to integrate figure generation into your analysis scripts reduces chances of errors and increases the accessibility of resulting analyses pipeline, with more advanced tools now allowing for the seamless integration of prose and code. Here, we review the advantages of learning and using programmatic neuroimaging visualizations, focusing on benefits to replicability, flexibility and integration. We conclude by introducing examples of R-packages which allow for visualization of statistics at region-of-interest (ROI), voxel, vertex, and edge level data, followed by a brief discussion of limitations and functionality gaps in code-based brain visualization tools.
 
 # Replicability
 
-In recent years, there have been multiple large-scale efforts empirically demonstrating the lack of reproducibility of findings from neuroimaging data (Poldrack et al., 2017). One common solution proposed for achieving robust and reliable discoveries has been to encourage scientific output which can be transparently evaluated and independently replicated. In practice, this typically entails openly sharing detailed methods, materials, code, and data. While there is a trend towards increasing transparency and code sharing of neuroimaging analyses, the sharing of code used to generate figures which include brain renderings and spatial maps has been relatively neglected. This gap in reproducibility is partly driven by the fact that brain figures are often created using a manual process that involves tinkering with sliders, buttons, and overlays on a GUI, concluding with a screenshot and sometimes beautification in image processing software like Illustrator or Photoshop. Such a process inherently makes neuroimaging visualizations difficult, if not impossible to replicate, even by the authors themselves.
+In recent years, there have been multiple large-scale efforts empirically demonstrating the lack of reproducibility of findings from neuroimaging data (Poldrack et al., 2017). One common solution proposed for achieving robust and reliable discoveries has been to encourage scientific output which can be transparently evaluated and independently replicated. In practice, this typically entails openly sharing detailed methods, materials, code, and data. While there is a trend towards increasing transparency and code sharing of neuroimaging analyses, the sharing of code used to generate figures which include brain renderings and spatial maps has been relatively neglected. This gap in reproducibility is partly driven by the fact that brain figures are often created using a manual process that involves tinkering with sliders, buttons, and overlays on a GUI, concluding with a screenshot and sometimes beautification in image processing software like Illustrator, Photoshop or Inkscape. Such a process inherently makes neuroimaging visualizations difficult, if not impossible to replicate, even by the authors themselves.
 
 Visualization scripts should reflect a core feature of open science. Given that brain figures regularly form the centerpiece of interpretation within papers, conference presentations, or news reports, making sure they can be reliably regenerated is crucial for knowledge generation. By writing and sharing code used to generate brain visualizations, a direct and traceable link is established between the underlying data and the corresponding scientific figure. While the code that produces a replicable figure doesn't necessarily reflect the validity of the scientific finding or the accuracy of the associated content, it allows for reproducibility, instilling transparency and robustness, while demonstrating a desire to further scientific knowledge. Some even consider publishing figures which cannot be replicated as closer to advertising, rather than science (Steel, 2013).
 
@@ -80,13 +80,13 @@ Often programming languages such as R, Python and MATLAB are used for the analys
 
 Increasingly popular software such as *R Markdown*, *Quarto* and *Jupyter Notebook* allow for the mixing of prose and code in a single script, resulting in fully reproducible and publication ready papers. By using code-based tools available within your preferred environment, brain visualizations can be directly integrated and embedded within a paper or report. For instance, a fully reproducible version of the current paper can be found on [GitHub](https://github.com/sidchop/RepoNeuroVis). Some journals that publish neuroimaging studies are moving towards allowing the submission of reproducible manuscripts, including reproducible figures (e.g. *e-Life*, *Aperture Neuro*), with other journals like *F1000Research* and *GigaScience* even allowing on-demand re-running of code computational environment linked to the associated article using 'compute capsules' from the cloud-based platform Code Ocean (Code Ocean, 2021).
 
-Neuroimaging data are often spatially 3D and can have multiple time points, adding a 4th dimension (e.g., fMRI data). Thus, communicating findings or evaluating quality using static 2D slices is challenging, and may not be the best representation of the data, or the interpretations. While well-curated 3D renderings can help with spatial localisation (see Madan, 2015; Pernet & Madan, 2019), in the end, static images can only provide an incomplete representation of the data, and forces researchers to choose the "best" angle or slice to show, which often involves compromising one result to emphasize another. An added advantage of some of the code-based tools is that you can generate 'rich' media like interactive widgets -- figures or animations, which allow users to zoom, rotate and scroll through slices. Interacting with a figure in this way can improve scientific communication of findings. Linking to or even embedding these videos or interactive figures in papers can greatly enhance the communication of findings and make your paper more engaging for the reader. Such rich brain visualizations lend themselves to being embedded or shared on science communication mediums beyond academic papers - such as presentations, websites and social media - all of which can promote the communication of your research with peers and a reach larger audiences (Li and Xie, 2020). This last point is becoming increasingly salient as marketing science on social media has become a core medium for spreading discoveries, science communication to the public, and even a primary avenue for employment opportunities for early-career researchers (Baker, 2015; Lee, 2019). Overall, public engagement is one of the cornerstones of science, and the images we create are at the center of the process.
+Neuroimaging data are often spatially 3D and can have multiple time points, adding a 4th dimension (e.g., fMRI data). Thus, communicating findings or evaluating quality using static 2D slices is challenging, and may not be the best representation of the data, or the interpretations. While well-curated 3D renderings can help with spatial localisation (see Madan, 2015; Pernet & Madan, 2019), in the end, static images can only provide an incomplete representation of the data, and forces researchers to choose the "best" angle or slice to show, which often involves compromising one result to emphasize another. An added advantage of some of the code-based tools is that you can generate 'rich' media like interactive widgets -- figures or animations, which allow users to zoom, rotate and scroll through slices. Interacting with a figure in this way can improve scientific communication of findings. Linking to or even embedding these videos or interactive figures in papers can greatly enhance the communication of findings and make your paper more engaging for the reader. Such rich brain visualizations lend themselves to being embedded or shared on science communication mediums beyond academic papers - such as presentations, websites and social media - all of which can promote the communication of your research with peers and reach larger audiences (Li and Xie, 2020). This last point is becoming increasingly salient as marketing science on social media has become a core medium for spreading discoveries, science communication to the public, and even a primary avenue for employment opportunities for early-career researchers (Baker, 2015; Lee, 2019). Overall, public engagement is one of the cornerstones of science, and the images we create are at the center of the process.
 
 \
 **Table 1. Examples of code-based neuroimaging visualizations tools that can be accessed directly within R, MATLAB and Python environments.**
 
 |                                                        | Voxel   | Vertex  | ROI           | Edge    | Streamlines |
-|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|
+|:------------------|:----------|:----------|:----------|:----------|:----------|
 | **R**                                                  |         |         |               |         |             |
 | [ANTsR](https://github.com/ANTsX/ANTsR)                | ***+*** | ***+*** | ***+***       |         |             |
 | [brainconn](https://github.com/sidchop/brainconn)      |         |         |               | ***+*** |             |
@@ -134,7 +134,7 @@ Neuroimaging data are often spatially 3D and can have multiple time points, addi
 | Vistasoft                                              | ***+*** | ***+*** | ***+***       |         | ***+***     |
 
 Note: The tools listed contain functionality required to generate (at least close-to) publication-ready neuroimaging figures via user-entered code within R, MATLAB and Python environments. This list does not include cross-platform general purpose visualization software.\
-\*Cortex only
+***\****Cortex only
 
 # Examples of Neuroimaging Visualization Packages available in *R and Python*
 
@@ -144,13 +144,14 @@ The following four sections provide brief examples of well documented and beginn
 \newpage
 \blandscape
 ```
-```{r Figure1 , echo=FALSE, out.height = '80%', out.width = '80%', fig.align='center'}
+
+```{r Figure1, echo=FALSE, out.height = '80%', out.width = '80%', fig.align='center'}
 
 library(patchwork)
 library(ggplot2)
 
 
-fig_name <- c('fig1a', 'fig1b', 'fig1c', 'fig1d', 'fig1e', 'fig1f', 'fig1g1', 'fig1g2', 'fig1g3','fig1h', 'fig1i')
+fig_name <- c('fig1a', 'fig1b', 'fig1c', 'fig1d', 'fig1e', 'fig1f', 'fig1g', 'fig1h', 'fig1i')
 figs <- list()
 
 for (f in 1:length(fig_name)) { 
@@ -160,16 +161,14 @@ for (f in 1:length(fig_name)) {
                                                              height=ggplot2::unit(1,"npc")))
 }
 
-patchwork <- figs[[1]]/figs[[2]]|((figs[[6]]/(figs[[8]]|figs[[9]]))/figs[[7]])+plot_layout(heights = c(0.8,0.8,1.5))|((figs[[3]]/figs[[4]]/figs[[10]])+plot_layout(heights = c(0.5,1,1)))
+patchwork <- figs[[1]]/figs[[2]]|((figs[[3]]/(figs[[4]]|figs[[5]]))/figs[[6]])+plot_layout(heights = c(0.8,0.8,1.5))|((figs[[7]]/figs[[8]]/figs[[9]])+plot_layout(heights = c(0.5,1,1)))
 
 
 
 patchwork + plot_annotation(tag_levels = 'A',
                             title = 'Examples of brain visualizations made in R') &
-    theme(plot.tag = element_text(face = 'bold'),
-          plot.title = element_text(face="bold"))
-
-              
+  theme(plot.tag = element_text(face = 'bold'),
+        plot.title = element_text(face="bold"))
 
 
 ```
@@ -182,36 +181,35 @@ patchwork + plot_annotation(tag_levels = 'A',
 \newpage
 \blandscape
 ```
-```{r Figure2 , echo=FALSE, out.height = '80%', out.width = '80%', fig.align='center', eval=FALSE}
+
+```{r Figure2, echo=FALSE, out.height = '80%', out.width = '80%', fig.align='center', eval=FALSE}
 
 library(patchwork)
 library(ggplot2)
 
 
-fig_name <- c('fig1', 'fig2', 'fig3', 'fig4', 'fig5', 'fig6', 'fig7')
+fig_name <- c('fig2a', 'fig2b', 'fig2c', 'fig2d', 'fig2e', 'fig2f')
 figs <- list()
 
 for (f in 1:length(fig_name)) { 
   knitr::plot_crop(paste0('data/python/',fig_name[f],'.png'))
   figs[[f]] <- ggplot() +
     annotation_custom(grid::rasterGrob(png::readPNG(paste0('data/python/',fig_name[f],'.png')),
-                                                             width=ggplot2::unit(1,"npc"),
-                                                             height=ggplot2::unit(1,"npc")))
+                                       width=ggplot2::unit(1,"npc"),
+                                       height=ggplot2::unit(1,"npc")))
 }
 
 
-patchwork2 <- (figs[[1]]+figs[[3]])/figs[[2]] | (figs[[6]]/figs[[4]]/figs[[5]])
+patchwork1 <- (figs[[1]] + figs[[3]]) / figs[[2]] + plot_layout(heights = c(1.2,0.8))
 
-  figs[[1]]/figs[[2]]|((figs[[6]]/(figs[[8]]|figs[[9]]))/figs[[7]])+plot_layout(heights = c(0.8,0.8,1.5))|((figs[[3]]/figs[[4]]/figs[[10]])+plot_layout(heights = c(0.5,1,1)))
+patchwork2 <-  figs[[4]] / (plot_spacer() + figs[[5]] + plot_spacer()) / figs[[6]] + plot_layout(heights = c(1.2,0.8, 1.2))
 
 
 
 patchwork + plot_annotation(tag_levels = 'A',
                             title = 'Examples of brain visualizations made in Python') &
-    theme(plot.tag = element_text(face = 'bold'),
-          plot.title = element_text(face="bold"))
-
-              
+  theme(plot.tag = element_text(face = 'bold'),
+        plot.title = element_text(face="bold"))
 
 
 ```
@@ -220,37 +218,11 @@ patchwork + plot_annotation(tag_levels = 'A',
 
 \elandscape
 
-## Voxel-Level Visualizations.
-
-**R.** The `oro.nifti` and `neurobase` packages allow for the reading, writing, manipulation and visualization of voxel-level imaging data of either *nifti*, *analyze* or *afni* formats. In particular, the `image`, `slice` and `ortho2` functions allow users to display the desired number of slices in the desired orientations, while also providing precise control over overlaid images, color scales, legend placement and other aesthetic settings (Fig 1A-B). Smoothing and re-sampling of images is sometimes required for visualization purposes, which can be achieved via the `ANTsR` or `fslr` packages.
-
-**Python.** The `NiBable` library provides the ability to read in and covert many common neuroimaging file formats, including *nifti,* to data-structures which can be manipulated and visualized. While these data-structures often form 3D or 4D matrices, so can be visualized using commonly used general purpose visualization tools such as `matplotlib` , purpose built librires like `nilearn` provide functions like `plot_stat_map` and `plot_glass_brain` which are user friendly and can generate publication ready figures (Fig. X). `nilearn` also includes smoothing and re-sampling functions which can sometimes required for visualization purposes.
-
-## Vertex-Level Visualizations.
-
-**R.** The recently developed `fsbrain` package allows for the visualization of vertex-level and cortical ROI-level data which were derived using *FreeSurfer*. The package contains many flexible functions for visualizing individual-level and group-level measures such as cortical thickness, volume or surface area (Fig 1F). In addition to producing publication-ready figures, the visualization functions can allow for visual quality control of large datasets processed using FreeSurfer. The package also comes with extensive guides and documentations to assist users (Schäfer & Ecker, 2020).
-
-CIFTI or 'grey-ordinate' data is becoming a popular format for structural and functional imaging data, as it combines vertex-level data of the cortex with voxel-level data for the cerebellum and sub-cortex. In R, CIFTI data can now be read, visualized and manipulated using the well-documented `ciftiTools` package (Fig 1C,1G; Pham, Muschelli, & Mejia, 2022). This package allows for both vertex-level visualization of the surface as well as voxel-level visualization of cerebellum and subcortex.
-
-**Python.** ciftify.
-
-## ROI-Level Visualizations.
-
-**R.** Statistical parameters can be mapped onto discreet cortical and sub-cortical regions using the `ggseg` and `ggseg3d` packages (Mowinckel & Vidal-Piñeiro, 2020). These packages flexibly generates aesthetic renderings of cortical, sub-cortical and white matter ROIs in 2D (Fig 1D,1F) and 3D (Fig 1E). Usually, ROI-level interpretations are dependent on a standardized atlas or parcellation scheme of the brain and accordingly, this package and its sister-packages (`ggsegExtra`) provide a large array of commonly used atlases and some functionality for users to contribute other atlases. Additionally, being part of the 'Grammar of Graphics' framework (Wickham, 2016) allows for integration with packages such as `gganimate`, enabling users to animate and visualize dynamic changes in spatial and temporal statistics across ROIs. Notably, the `ciftiTools` package also provides functions to visualize surface and voxel-level ROIs for the cortex and sub-cortex respectively (Fig 1E), flexibly allowing CIFTI format atlases and ROIs to be displayed.
-
-**Python.**
-
-## Edge-Level Visualizations.
-
-Analyses which divide the brain into discrete regions and examine pair-wise dependencies between regional phenotypes are becoming increasingly common. Often the results of these dependency analyses are statistics relating to 'edges' or links between any two regions. The package `brainconn` allows users to plot brain regions as nodes of a network graph, and dependencies between regions as edges of that graph, following a standardized coordinate space in both 2D and interactive 3D (Figure 1I). The graphs can be weighted, with the strength of the edges represented with color or line thickness, as well as directed, where arrows will be used in place of edges. This package comes with node coordinates corresponding to multiple commonly used atlases and contains functionality for users to easily enter their own custom atlas coordinates.
-
-**Python.**
-
 # Limitations and Functionality Gaps
 
-Most of the tools introduced above do not require a strong knowledge of programming, but there is still a steeper learning curve when compared to use a GUI. This is especially true when learning how to make fine adjustments to visual auxiliary such as legend placement, font size and multi-panel figure positioning, for the purpose of a publication-ready figure. While most code-based tools offer some control over these finer steps, there are differences between them in feature availability and usability. Relatedly, while some interactive image viewers which can be opened within an integrated development environment (e.g. Muschelli, 2016), for quick and interactive viewing of single images, GUI tool can be faster and more practical.
+Most of the tools introduced above do not require a strong knowledge of programming, but there is still a steeper learning curve compared to using a GUI. This is especially true when learning how to make fine adjustments to visual auxiliary such as legend placement, font size and multi-panel figure positioning, for the purpose of a publication-ready figure. While most code-based tools offer some control over these finer steps, there are differences between them in feature availability and usability. Relatedly, while some interactive image viewers which can be opened within an integrated development environment (e.g. Muschelli, 2016), for quick and interactive viewing of single images, GUI tool can be faster and more practical.
 
-Often cerebellar and brain-stem regions are not well represented in software (e.g. Figure 1), potentially mirroring the cortico-centric sentiment that has prevailed in human neuroimaging research (Chin, Chang, & Holmes, 2022). Likewise, custom non-cortical atlases such as non-standard subcortical atlas schemes are not yet straight forward, and usually require multiple functions and packages to visualize. Finally, some neuroimaging related data types, such as streamlines resulting from DWI-based tractography, are still not well represented in code-based visualization tools.
+Often cerebellar and brain-stem regions are not well represented in software (e.g. Figure 1), potentially mirroring the cortico-centric sentiment that has prevailed in human neuroimaging research (Chin, Chang, & Holmes, 2022). Likewise, custom non-cortical atlases such as non-standard subcortical atlas schemes are not yet straightforward, and usually require multiple functions and packages to visualize. Finally, some neuroimaging related data types, such as streamlines resulting from DWI-based tractography, are still not well represented in code-based visualization tools.
 
 As can be seen in Table 1, there are usually multiple packages within each programming environment which are capable of visualizing each data type. While this provide choice for advanced users, it can also lead to confusion for novice users who may not be familiar with the nuanced differences between tools. Future work should continue to consolidate brain visualization methods into unified beginner-friendly code-based tools which are capable of plotting multiple data types.
 
@@ -300,11 +272,12 @@ Chin, R., Chang, S. W., & Holmes, A. J. (2022). Beyond cortex: The evolution of 
 
 \newpage
 
-# Supplement (Code used to generate Figures)
+# Supplement 1 (Code used to generate Figure 1 - R Visulaizations)
 
 \singlespacing
 
-```{r Figure1-sup , echo=FALSE, out.height = '80%', out.width = '80%', fig.align='center', eval=FALSE}
+```{r Fig1 compile, eval=FALSE}
+# This code block complies all the panels of the figure into one, largely using the patchwork package. 
 
 library(patchwork)
 library(ggplot2)
@@ -314,25 +287,28 @@ fig_name <- c('fig1a', 'fig1b', 'fig1c', 'fig1d', 'fig1e', 'fig1f', 'fig1g1', 'f
 figs <- list()
 
 for (f in 1:length(fig_name)) { 
-  knitr::plot_crop(paste0('data/',fig_name[f],'.png'))
-  figs[[f]] <- ggplot() + annotation_custom(grid::rasterGrob(png::readPNG(paste0('data/',fig_name[f],'.png')),
+  knitr::plot_crop(paste0('data/R/',fig_name[f],'.png'))
+  figs[[f]] <- ggplot() + annotation_custom(grid::rasterGrob(png::readPNG(paste0('data/R/',fig_name[f],'.png')),
                                                              width=ggplot2::unit(1,"npc"),
                                                              height=ggplot2::unit(1,"npc")))
 }
 
+patchwork <- figs[[1]]/figs[[2]]|((figs[[6]]/(figs[[8]]|figs[[9]]))/figs[[7]]) + 
+  plot_layout(heights = c(0.8,0.8,1.5))|((figs[[3]]/figs[[4]]/figs[[10]]) + 
+                                           plot_layout(heights = c(0.5,1,1)))
 
-patchwork <- figs[[1]]/figs[[2]]|((figs[[6]]/(figs[[8]]|figs[[9]]))/figs[[7]])+plot_layout(heights = c(0.8,0.8,1.5))|((figs[[3]]/figs[[4]]/figs[[10]])+plot_layout(heights = c(0.7,1,1)))
+
+
 patchwork + plot_annotation(tag_levels = 'A',
-                            title = 'Examples of brain visualizations in R') &
-    theme(plot.tag = element_text(face = 'bold'),
-          plot.title = element_text(face="bold"))
+                            title = 'Examples of brain visualizations made in R') &
+  theme(plot.tag = element_text(face = 'bold'),
+        plot.title = element_text(face="bold"))
 
-              
 
 
 ```
 
-```{r Fig1a, eval=FALSE}
+```{r Fig1A, eval=FALSE}
 #Figure 1A (Voxel)
 
 library(neurobase)
@@ -350,7 +326,7 @@ effect[effect<0.3] <- NA
 breaks = seq(.3,.6, by=0.005)
 
 #[Optional] If you want to output the figure as a .png, open a png image device
-png("data/fig1a.png") 
+png("data/R/fig1a.png") 
 
 #Use the ortho2 function from the neurobase package to make the figure
 ortho2(x = template,   #Specify the background template
@@ -358,19 +334,19 @@ ortho2(x = template,   #Specify the background template
        crosshairs = F, #Remove the cross-hairs
        bg = "white",   #Make the background white 
        NA.x = T,       #Do not display NA values
-       col.y= rev(viridis::inferno(n = 500)), #Select the color scale. In this case I have used the inferno scale from the viridis package. 
+       col.y= rev(viridis::inferno(n = 500)), #Select the color scale. 
        xyz = c(70,50,80), #set the x y & z slice you want to visualize
        useRaster = T,     #Sometimes using Raster makes for clearer plots
        ycolorbar = TRUE,  #Add a color bar
        mfrow = c(1,1)) +  #layout of brain views (for this figure, we just want a axial view)
   colorbar(breaks, col = rev(viridis::inferno(n=length(breaks)-1)), #add a color bar with same color scale 
-           text.col = "black", labels = TRUE, maxleft = 0.95)  #Set the specifications for the color bar
+           text.col = "black", labels = FALSE, maxleft = 0.85)  #Set the specifications for the color bar
 
 dev.off()
 
 ```
 
-```{r Fig1b, eval=FALSE }
+```{r Fig1B, eval=FALSE}
 #Figure 1B (Voxel)
 
 library(neurobase)
@@ -382,113 +358,46 @@ t1 <- readnii('data/sub-001__t1_warped.nii.gz')
 #Load in a nifti (.nii.gz) file to use as a overlay. 
 atlas <-  readnii('data/sub-001_schaefer300n7_aseg_to_dwispace_gm_rois.nii.gz')
 
-png('data/fig1b.png')
+png('data/R/fig1b.png')
 overlay(x=robust_window(t1), y=atlas, 
-        plot.type = "single", 
-        z=c(seq(30,110,10)), 
+        plot.type = "single", #Single view (axial only)
+        z=c(seq(30,110,10)), #set slices you want to view (30 to 110, with a gap of 10 slices). 
         col.y =  alpha(viridis::inferno(300), 0.6),
         plane = "axial",  
         useRaster = T, 
         bg = "white",
-        NA.x=T, 
+        NA.x=T, #Make NA values on overlay transparent
         zlim.y =c(1,300))
 dev.off()
 
 ```
 
-```{r Fig1c , eval=FALSE}
-#vertex 1
-#Figure 1C
-library(rgl)
-library(ggplot2)
-# Load the package and point to the Connectome Workbench
+```{r Fig1C, eval=FALSE}
+#Figure 1C (Cortical ROI using ciftiTools)
+
+# Load the package 
 library(ciftiTools)
+library(rgl)
 
 #Need connectome workbench to use ciftiTools - set path below
 ciftiTools.setOption("wb_path", "/Applications/workbench/")
 
-# Read in CIFTI file
+#Define CIFTI file names for time series and surface files. 
 cifti_fname <- ciftiTools::ciftiTools.files()$cifti["dtseries"]
 surfL_fname <- ciftiTools.files()$surf["left"]
 surfR_fname <- ciftiTools.files()$surf["right"]
 
+# Read in CIFTI file
 cii <- read_cifti(
   cifti_fname, brainstructures="all", 
   surfL_fname=surfL_fname,
   surfR_fname=surfR_fname)
 
-#Plot cifti surface
-view_xifti_surface(cii, 
-                   hemisphere = "both", 
-                   view = "lateral", 
-                   idx = 1,
-                   colors = viridis::plasma(n = 100),
-                   zlim = c(1.2,1.5),  
-                   legend_embed = T,
-                   cex.title = 2)
-
-
-
-rgl.snapshot("data/fig1c.png")
-rgl.close()
-
-```
-
-```{r Fig1d , eval=FALSE}
-#Vertex 2
-#Figure 1X - Remove white space
-
-
-library(fsbrain)
-library(rgl)
-
-#download_optional_data()
-#download_fsaverage(accept_freesurfer_license = TRUE)
-
-subjects_dir <- get_optional_data_filepath("subjects_dir")
-
-subject_id <- 'subject1' 
-
-colourmap <- colorRampPalette(viridis::plasma(n = 1000))
-fsbrain.set.default.figsize(700, 700);
-
-brain = vis.subject.morph.native(subjects_dir, 
-                                subject_id, 'sulc', 
-                                cortex_only = T, 
-                                views=NULL, 
-                                draw_colorbar = FALSE,
-                                makecmap_options = list('colFn'=colourmap))
-
-img = export(brain, draw_colorbar = FALSE, output_img = "data/fig1d.png")
-
-
-
-```
-
-```{r Fig1e , eval=FALSE}
-#ROI1 
-#Figure 1e 
-library(ciftiTools)
-parc <- load_parc("Yeo_7")
-view_xifti_surface(parc,  
-                   legend_embed = T,
-                   hemisphere = "right")
-
-rgl.snapshot("data/fig1e.png")
-
-rgl.close()
-
-```
-
-```{r Fig1f , eval=FALSE}
-#ROI1 
-#Figure 1X - combine with previous figure
-
 set.seed(1993) #set a random seed (good practice for reproducibility)
 
-parc <- load_parc("Schaefer_400")
+parc <- load_parc("Schaefer_400") #ciftitools has a few atlas in cifti format already included
 
-ramdom_metric <- rnorm(400)
+ramdom_metric <- rnorm(400) #generate random data to plot on cortex
 
 cii <- move_from_mwall(cii, NA)
 
@@ -500,50 +409,24 @@ xii1 <- select_xifti(cii, 1)
 
 xii_metric <- newdata_xifti(xii1, xii_metric)
 
-plot2 <- view_xifti_surface(xii_metric, 
-                            colors = viridis::viridis(n = 400), 
-                            borders = "black", 
-                            hemisphere = "both",
-                            view = 'lateral')
+view_xifti_surface(xii_metric, 
+                   colors = viridis::viridis(n = 400), 
+                   borders = "black", 
+                   hemisphere = "both",
+                   view = 'lateral')
 
-rgl.snapshot("data/fig1f.png")
+rgl.snapshot("data/R/fig1c.png")
 
 rgl.close()
 
 
 ```
 
-```{r Fig1g, eval=FALSE}
-#ROI2
+```{r Fig1D, eval=FALSE}
+#Figure 1D (Subcortical ROI using ggseg)
 
-#devtools::install_github("LCBC-UiO/ggsegGlasser")
 library(ggseg)
 library(ggplot2)
-library(ggsegGlasser)
-
-set.seed(1993) #set a random seed (good practice for reproducibility)
-
-
-base_atlas <- as.data.frame(na.omit(cbind(glasser$data$region, glasser$data$hemi)))
-
-colnames(base_atlas) <- c("region", "hemi")
-
-Effect <- rnorm(dim(base_atlas)[1]) #generate a random numbers for each roi in the atlas
-
-base_atlas <- cbind(Effect, base_atlas)
-
-
-cortex <- ggseg(atlas = glasser,
-                .data = base_atlas,
-                mapping=aes(fill=Effect), 
-                position="stacked",
-                colour="black",
-                size=.2,
-                show.legend = T,
-                plot.background = "white") +
-  scale_fill_viridis_b() + 
-   theme_void() +
-    theme(legend.position = "bottom")
 
 sub_base_atlas <- as.data.frame(na.omit(cbind(aseg$data$region, aseg$data$hemi)))
 
@@ -552,7 +435,6 @@ colnames(sub_base_atlas) <- c("region", "hemi")
 Effect <- rnorm(dim(sub_base_atlas)[1])
 
 sub_base_atlas <- cbind(Effect, sub_base_atlas)
-
 subcortex <- ggseg(atlas = aseg,
                    .data = sub_base_atlas,
                    mapping=aes(fill=Effect), 
@@ -562,15 +444,17 @@ subcortex <- ggseg(atlas = aseg,
                    size=.2,
                    show.legend = T, 
                    plot.background = "white") + 
-  scale_fill_viridis_b() 
+  scale_fill_viridis_b() +
+  theme(legend.text=element_text(size=15),
+        legend.title  = element_blank())
 
-ggsave(filename = 'data/fig1g1.png', plot = cortex, device = 'png', bg = 'white')
-ggsave(filename = 'data/fig1g2.png', plot = subcortex, device = 'png', bg = 'white')
-
+ggsave(filename = 'data/R/fig1d.png', plot = subcortex, device = 'png', bg = 'white')
 ```
 
-```{r, eval=FALSE}
+```{r Fig1E, eval=FALSE}
+#Figure 1E (Subcortical ROI using ggseg3D)
 
+#The function below plots 3d version of aseg. See "inputs" within function for more details. 
 make_ggseg3d <- function(attribute, 
                          colour.pal = c("light yellow",
                                         "orange",
@@ -634,44 +518,144 @@ set.seed(1993)
 volume <- sample(1:20, 14) #randomly generated data for 14 structures
 make_ggseg3d(volume, 
              colour.pal = viridis::viridis(n=length(volume)), 
-             output.png = T, file.name = "data/fig1g3.png")
-
-
+             output.png = T,
+             file.name = "data/R/fig1e.png")
 
 
 ```
 
-```{r Fig1h , eval = F}
-#Edge (also add 3d version)
-#Fig1X
+```{r Fig1F, eval=FALSE}
+#Figure 1F (Cortical ROI using ggseg)
+
+library(ggseg)
+library(ggplot2)
+#devtools::install_github("LCBC-UiO/ggsegGlasser")
+library(ggsegGlasser)
+
+#create dataframe with region names and hemisphere for the glasser atlas
+base_atlas <- as.data.frame(na.omit(cbind(glasser$data$region, glasser$data$hemi)))
+
+colnames(base_atlas) <- c("region", "hemi")
+
+set.seed(1993) #set a random seed (good practice for reproducibility)
+Effect <- rnorm(dim(base_atlas)[1]) #generate a random numbers for each roi in the atlas
+
+base_atlas <- cbind(Effect, base_atlas)
+
+#Cortex
+cortex <- ggseg(atlas = glasser,
+                .data = base_atlas,
+                mapping=aes(fill=Effect), 
+                position="stacked",
+                colour="black",
+                size=.2,
+                show.legend = T,
+                plot.background = "white") +
+  scale_fill_viridis_b() + 
+  theme_void() +
+  theme(legend.position = "bottom",
+        legend.text=element_text(size=15),
+        legend.title  = element_blank())
+
+
+ggsave(filename = 'data/R/fig1f.png', plot = cortex, device = 'png', bg = 'white')
+
+```
+
+```{r Fig1G, eval=FALSE}
+#Figure 1G (Vertex using ciftiTools)
+
+library(rgl)
+library(ggplot2)
+
+# Load the package and point to the Connectome Workbench
+library(ciftiTools)
+
+#Need connectome workbench to use ciftiTools - set path below
+ciftiTools.setOption("wb_path", "/Applications/workbench/")
+
+#Define CIFTI file names for time series and surface files. 
+cifti_fname <- ciftiTools::ciftiTools.files()$cifti["dtseries"]
+surfL_fname <- ciftiTools.files()$surf["left"]
+surfR_fname <- ciftiTools.files()$surf["right"]
+
+# Read in CIFTI file
+cii <- read_cifti(
+  cifti_fname, brainstructures="all", 
+  surfL_fname=surfL_fname,
+  surfR_fname=surfR_fname)
+
+#Plot mean time series on CIFTI surface
+view_xifti_surface(cii, 
+                   hemisphere = "both", 
+                   view = "lateral", 
+                   idx = 1,
+                   colors = viridis::plasma(n = 100),
+                   zlim = c(1.2,1.5),  
+                   legend_embed = T)
+
+
+rgl.snapshot("data/R/fig1g.png") #save output in RGL window as 
+rgl.close()
+
+```
+
+```{r Fig1H, eval=FALSE}
+#Figure 1H (Vertex using fsbrain)
+
+library(fsbrain)
+library(rgl)
+
+#download example freesurfer data which comes with the fsbrain package
+#download_optional_data() 
+#download_fsaverage(accept_freesurfer_license = TRUE)
+
+subjects_dir <- get_optional_data_filepath("subjects_dir")
+
+subject_id <- 'subject1' 
+
+colourmap <- colorRampPalette(viridis::plasma(n = 1000)) #set colourmap
+
+# set figure size (optional)
+fsbrain.set.default.figsize(700, 700) 
+
+# generate figure
+brain = vis.subject.morph.native(subjects_dir, 
+                                 subject_id, 'sulc', 
+                                 cortex_only = T, 
+                                 views=NULL, 
+                                 draw_colorbar = FALSE,
+                                 makecmap_options = list('colFn'=colourmap))
+
+img = export(brain, draw_colorbar = FALSE, output_img = "data/R/fig1h.png") #write out figure
+
+```
+
+```{r Fig1I, eval=FALSE}
+#Fig1I (Edges visualized using brainconn)
 
 #devtools::install_github("sidchop/brainconn")
 library(brainconn)
 
-conmat <- example_weighted_undirected
+conmat <- example_weighted_undirected #one of the example matrices included with brainconn
 degree <- rowSums(conmat)[which(rowSums(conmat)!=0)]
 
-brainconn(atlas ="schaefer300_n7", 
+fig1i <- brainconn(atlas ="schaefer300_n7", 
                    conmat=conmat, 
                    node.size = degree/2,
-                   view="top", 
+                   view="ortho", 
                    edge.color.weighted = T,
-                   background.alpha = 0.8, 
-                   show.legend = F, 
-                   edge.color = scale_edge_colour_viridis()) 
+                   background.alpha = 0.6, 
+                   edge.color = scale_edge_colour_viridis(option = "C"))
 
 
 
-ggsave(filename = 'data/fig1h.png', 
-       plot = fig1h, 
+ggsave(filename = 'data/R/fig1i.png', 
+       plot = fig1i, 
        device = 'png',
        bg = 'white',
        height = 7, 
        units = "in")
 
-
-brainconn3D(atlas ="schaefer300_n7", 
-            conmat=conmat,
-            show.legend = F)
 
 ```
