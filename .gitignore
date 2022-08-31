@@ -6,3 +6,7 @@ coauthor_feedback
 *.tex
 *.log
 *.html
+readme.Rmd
+*.sty
+*.Rproj
+manuscript_files
