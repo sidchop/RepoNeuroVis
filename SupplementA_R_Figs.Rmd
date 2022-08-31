@@ -1,0 +1,391 @@
+---
+title: "Supplement 1 - code for R figures"
+output: html_notebook
+---
+
+
+```{r Fig1A, eval=FALSE}
+#Figure 1A (Voxel)
+
+library(neurobase)
+
+#Load in a nifti (.nii.gz) file of a standardized template so use as a background. 
+template <- readnii('data/MNI152_T1_1mm_brain.nii.gz') #load the nifti file into R
+
+#Load in a nifti (.nii.gz) file of the statistic you wanted of overlay, with the same dimensions as the template.  
+effect <- readnii("data/MNI152_effect_size.nii.gz") 
+
+#Threshold the statistic map so only values about a specified amount are displayed
+effect[effect<0.3] <- NA 
+
+#Set the breaks/intervals you want on the color bar (e.g. from .3 to .6, by intervals of 0.005)
+breaks = seq(.3,.6, by=0.005)
+
+#[Optional] If you want to output the figure as a .png, open a png image device
+png("data/R/fig1a.png") 
+
+#Use the ortho2 function from the neurobase package to make the figure
+ortho2(x = template,   #Specify the background template
+       y = effect,     #Specify the effect you want to overlay on the template
+       crosshairs = F, #Remove the cross-hairs
+       bg = "white",   #Make the background white 
+       NA.x = T,       #Do not display NA values
+       col.y= rev(viridis::inferno(n = 500)), #Select the color scale. 
+       xyz = c(70,50,80), #set the x y & z slice you want to visualize
+       useRaster = T,     #Sometimes using Raster makes for clearer plots
+       ycolorbar = TRUE,  #Add a color bar
+       mfrow = c(1,1)) +  #layout of brain views (for this figure, we just want a axial view)
+  colorbar(breaks, col = rev(viridis::inferno(n=length(breaks)-1)), #add a color bar with same color scale 
+           text.col = "black", labels = FALSE, maxleft = 0.85)  #Set the specifications for the color bar
+
+dev.off()
+
+```
+
+```{r Fig1B, eval=FALSE}
+#Figure 1B (Voxel)
+
+library(neurobase)
+library(scales)
+
+#Load in a nifti (.nii.gz) file to use as a background. 
+t1 <- readnii('data/sub-001__t1_warped.nii.gz') 
+
+#Load in a nifti (.nii.gz) file to use as a overlay. 
+atlas <-  readnii('data/sub-001_schaefer300n7_aseg_to_dwispace_gm_rois.nii.gz')
+
+png('data/R/fig1b.png')
+overlay(x=robust_window(t1), y=atlas, 
+        plot.type = "single", #Single view (axial only)
+        z=c(seq(30,110,10)), #set slices you want to view (30 to 110, with a gap of 10 slices). 
+        col.y =  alpha(viridis::inferno(300), 0.6),
+        plane = "axial",  
+        useRaster = T, 
+        bg = "white",
+        NA.x=T, #Make NA values on overlay transparent
+        zlim.y =c(1,300))
+dev.off()
+
+```
+
+```{r Fig1C, eval=FALSE}
+#Figure 1C (Cortical ROI using ciftiTools)
+
+# Load the package 
+library(ciftiTools)
+library(rgl)
+
+#Need connectome workbench to use ciftiTools - set path below
+ciftiTools.setOption("wb_path", "/Applications/workbench/")
+
+#Define CIFTI file names for time series and surface files. 
+cifti_fname <- ciftiTools::ciftiTools.files()$cifti["dtseries"]
+surfL_fname <- ciftiTools.files()$surf["left"]
+surfR_fname <- ciftiTools.files()$surf["right"]
+
+# Read in CIFTI file
+cii <- read_cifti(
+  cifti_fname, brainstructures="all", 
+  surfL_fname=surfL_fname,
+  surfR_fname=surfR_fname)
+
+set.seed(1993) #set a random seed (good practice for reproducibility)
+
+parc <- load_parc("Schaefer_400") #ciftitools has a few atlas in cifti format already included
+
+ramdom_metric <- rnorm(400) #generate random data to plot on cortex
+
+cii <- move_from_mwall(cii, NA)
+
+parc_vec <- c(as.matrix(parc))
+
+xii_metric <- c(NA, ramdom_metric)[parc_vec + 1]
+
+xii1 <- select_xifti(cii, 1)
+
+xii_metric <- newdata_xifti(xii1, xii_metric)
+
+view_xifti_surface(xii_metric, 
+                   colors = viridis::viridis(n = 400), 
+                   borders = "black", 
+                   hemisphere = "both",
+                   view = 'lateral')
+
+rgl.snapshot("data/R/fig1c.png")
+
+rgl.close()
+
+
+```
+
+```{r Fig1D, eval=FALSE}
+#Figure 1D (Subcortical ROI using ggseg)
+
+library(ggseg)
+library(ggplot2)
+
+sub_base_atlas <- as.data.frame(na.omit(cbind(aseg$data$region, aseg$data$hemi)))
+
+colnames(sub_base_atlas) <- c("region", "hemi")
+
+Effect <- rnorm(dim(sub_base_atlas)[1])
+
+sub_base_atlas <- cbind(Effect, sub_base_atlas)
+subcortex <- ggseg(atlas = aseg,
+                   .data = sub_base_atlas,
+                   mapping=aes(fill=Effect), 
+                   position = "dispersed",
+                   colour="black",
+                   hemi =c('left', 'right'),
+                   size=.2,
+                   show.legend = T, 
+                   plot.background = "white") + 
+  scale_fill_viridis_b() +
+  theme(legend.text=element_text(size=15),
+        legend.title  = element_blank())
+
+ggsave(filename = 'data/R/fig1d.png', plot = subcortex, device = 'png', bg = 'white')
+```
+
+```{r Fig1E, eval=FALSE}
+#Figure 1E (Subcortical ROI using ggseg3D)
+
+#The function below plots 3d version of aseg. See "inputs" within function for more details. 
+make_ggseg3d <- function(attribute, 
+                         colour.pal = c("light yellow",
+                                        "orange",
+                                        "red",
+                                        "dark red"), 
+                         hide.colourbar=FALSE, 
+                         output.png=FALSE, 
+                         file.name="ggseg_3d.png") {
+  # Inputs: 
+  #' attribute = This must be a numeric vector in this: Left-Thalamus, Left-Caudate, Left
+  #' -Putamen, Left-Pallidum Left-Hippocampus, Left-Amygdala, Left-Accumbens-area, Righ
+  #' t-Thalamus-Proper, Right-Caudate, Right-Putamen, Right-Pallidum, Right-Hippocampus, Righ
+  #' t-Amygdala, Right-Accumbens-area
+  
+  library(ggseg3d)
+  library(tidyr)
+  library(dplyr)
+  #remove(aseg_3d)
+  aseg_3d <- aseg_3d
+  aseg_3d <- tidyr::unnest(aseg_3d, cols = c(ggseg_3d))
+  
+  attribute.ggseg3d <- c(rep(NA, 4), attribute[1:4], rep(NA, 3), attribute[5:7],
+                         rep(NA, 5), attribute[8:14],  rep(NA, 6))
+  
+  data <- dplyr::mutate(aseg_3d, attribute =  attribute.ggseg3d)
+  #remove NA regions
+  aseg_3d[which(is.na(data$attribute)),] <- NA
+  aseg_3d <- tidyr::drop_na(aseg_3d)
+  
+  data[which(is.na(data$attribute)),] <- NA
+  data <- tidyr::drop_na(data)
+  data$attribute[data$attribute==0]<-NA #make 0 valus NA so they are set as grey in ggseg3d
+  
+  scene=list(camera = list(eye = list(x = 0, y = 1, z = -2.25)),
+             aspectratio = list(x=1.6,y=1.6,z=1.6))
+  
+  
+  plot <- ggseg3d::ggseg3d(.data = data, 
+                           atlas = aseg_3d, 
+                           colour = "attribute", 
+                           text = "attribute",
+                           palette = colour.pal)
+  plot <- remove_axes(plot)
+  plot <- plotly::layout(plot, 
+                         scene = scene, 
+                         width = 600, height = 600) 
+  
+  if(hide.colourbar==TRUE){
+    plot <- plotly::hide_colorbar(plot)
+  }
+  
+  if( output.png==TRUE){
+    plotly::orca(plot, file =  file.name)
+  }
+  
+  return(plot)
+  
+}
+
+set.seed(1993)
+volume <- sample(1:20, 14) #randomly generated data for 14 structures
+make_ggseg3d(volume, 
+             colour.pal = viridis::viridis(n=length(volume)), 
+             output.png = T,
+             file.name = "data/R/fig1e.png")
+
+
+```
+
+```{r Fig1F, eval=FALSE}
+#Figure 1F (Cortical ROI using ggseg)
+
+library(ggseg)
+library(ggplot2)
+#devtools::install_github("LCBC-UiO/ggsegGlasser")
+library(ggsegGlasser)
+
+#create dataframe with region names and hemisphere for the glasser atlas
+base_atlas <- as.data.frame(na.omit(cbind(glasser$data$region, glasser$data$hemi)))
+
+colnames(base_atlas) <- c("region", "hemi")
+
+set.seed(1993) #set a random seed (good practice for reproducibility)
+Effect <- rnorm(dim(base_atlas)[1]) #generate a random numbers for each roi in the atlas
+
+base_atlas <- cbind(Effect, base_atlas)
+
+#Cortex
+cortex <- ggseg(atlas = glasser,
+                .data = base_atlas,
+                mapping=aes(fill=Effect), 
+                position="stacked",
+                colour="black",
+                size=.2,
+                show.legend = T,
+                plot.background = "white") +
+  scale_fill_viridis_b() + 
+  theme_void() +
+  theme(legend.position = "bottom",
+        legend.text=element_text(size=15),
+        legend.title  = element_blank())
+
+
+ggsave(filename = 'data/R/fig1f.png', plot = cortex, device = 'png', bg = 'white')
+
+```
+
+```{r Fig1G, eval=FALSE}
+#Figure 1G (Vertex using ciftiTools)
+
+library(rgl)
+library(ggplot2)
+
+# Load the package and point to the Connectome Workbench
+library(ciftiTools)
+
+#Need connectome workbench to use ciftiTools - set path below
+ciftiTools.setOption("wb_path", "/Applications/workbench/")
+
+#Define CIFTI file names for time series and surface files. 
+cifti_fname <- ciftiTools::ciftiTools.files()$cifti["dtseries"]
+surfL_fname <- ciftiTools.files()$surf["left"]
+surfR_fname <- ciftiTools.files()$surf["right"]
+
+# Read in CIFTI file
+cii <- read_cifti(
+  cifti_fname, brainstructures="all", 
+  surfL_fname=surfL_fname,
+  surfR_fname=surfR_fname)
+
+#Plot mean time series on CIFTI surface
+view_xifti_surface(cii, 
+                   hemisphere = "both", 
+                   view = "lateral", 
+                   idx = 1,
+                   colors = viridis::plasma(n = 100),
+                   zlim = c(1.2,1.5),  
+                   legend_embed = T)
+
+
+rgl.snapshot("data/R/fig1g.png") #save output in RGL window as 
+rgl.close()
+
+```
+
+```{r Fig1H, eval=FALSE}
+#Figure 1H (Vertex using fsbrain)
+
+library(fsbrain)
+library(rgl)
+
+#download example freesurfer data which comes with the fsbrain package
+#download_optional_data() 
+#download_fsaverage(accept_freesurfer_license = TRUE)
+
+subjects_dir <- get_optional_data_filepath("subjects_dir")
+
+subject_id <- 'subject1' 
+
+colourmap <- colorRampPalette(viridis::plasma(n = 1000)) #set colourmap
+
+# set figure size (optional)
+fsbrain.set.default.figsize(700, 700) 
+
+# generate figure
+brain = vis.subject.morph.native(subjects_dir, 
+                                 subject_id, 'sulc', 
+                                 cortex_only = T, 
+                                 views=NULL, 
+                                 draw_colorbar = FALSE,
+                                 makecmap_options = list('colFn'=colourmap))
+
+img = export(brain, draw_colorbar = FALSE, output_img = "data/R/fig1h.png") #write out figure
+
+```
+
+```{r Fig1I, eval=FALSE}
+#Fig1I (Edges visualized using brainconn)
+
+#devtools::install_github("sidchop/brainconn")
+library(brainconn)
+
+conmat <- example_weighted_undirected #one of the example matrices included with brainconn
+degree <- rowSums(conmat)[which(rowSums(conmat)!=0)]
+
+fig1i <- brainconn(atlas ="schaefer300_n7", 
+                   conmat=conmat, 
+                   node.size = degree/2,
+                   view="ortho", 
+                   edge.color.weighted = T,
+                   background.alpha = 0.6, 
+                   edge.color = scale_edge_colour_viridis(option = "C"))
+
+
+
+ggsave(filename = 'data/R/fig1i.png', 
+       plot = fig1i, 
+       device = 'png',
+       bg = 'white',
+       height = 7, 
+       units = "in")
+
+
+```
+
+\singlespacing
+
+```{r Fig1 compile, eval=FALSE}
+# This code block complies all the panels of the figure into one, largely using the patchwork package. 
+
+library(patchwork)
+library(ggplot2)
+
+
+fig_name <- c('fig1a', 'fig1b', 'fig1c', 'fig1d', 'fig1e', 'fig1f', 'fig1g1', 'fig1g2', 'fig1g3','fig1h', 'fig1i')
+figs <- list()
+
+for (f in 1:length(fig_name)) { 
+  knitr::plot_crop(paste0('data/R/',fig_name[f],'.png'))
+  figs[[f]] <- ggplot() + annotation_custom(grid::rasterGrob(png::readPNG(paste0('data/R/',fig_name[f],'.png')),
+                                                             width=ggplot2::unit(1,"npc"),
+                                                             height=ggplot2::unit(1,"npc")))
+}
+
+patchwork <- figs[[1]]/figs[[2]]|((figs[[6]]/(figs[[8]]|figs[[9]]))/figs[[7]]) + 
+  plot_layout(heights = c(0.8,0.8,1.5))|((figs[[3]]/figs[[4]]/figs[[10]]) + 
+                                           plot_layout(heights = c(0.5,1,1)))
+
+
+
+patchwork + plot_annotation(tag_levels = 'A',
+                            title = 'Examples of brain visualizations made in R') &
+  theme(plot.tag = element_text(face = 'bold'),
+        plot.title = element_text(face="bold"))
+
+
+
+```
