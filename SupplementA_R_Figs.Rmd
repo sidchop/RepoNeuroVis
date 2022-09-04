@@ -359,13 +359,11 @@ ggsave(filename = 'data/R/fig1i.png',
 \singlespacing
 
 ```{r Fig1 compile, eval=FALSE}
-# This code block complies all the panels of the figure into one, largely using the patchwork package. 
-
 library(patchwork)
 library(ggplot2)
 
 
-fig_name <- c('fig1a', 'fig1b', 'fig1c', 'fig1d', 'fig1e', 'fig1f', 'fig1g1', 'fig1g2', 'fig1g3','fig1h', 'fig1i')
+fig_name <- c('fig1a', 'fig1b', 'fig1c', 'fig1d', 'fig1e', 'fig1f', 'fig1g', 'fig1h', 'fig1i')
 figs <- list()
 
 for (f in 1:length(fig_name)) { 
@@ -375,17 +373,54 @@ for (f in 1:length(fig_name)) {
                                                              height=ggplot2::unit(1,"npc")))
 }
 
-patchwork <- figs[[1]]/figs[[2]]|((figs[[6]]/(figs[[8]]|figs[[9]]))/figs[[7]]) + 
-  plot_layout(heights = c(0.8,0.8,1.5))|((figs[[3]]/figs[[4]]/figs[[10]]) + 
-                                           plot_layout(heights = c(0.5,1,1)))
+patchwork <- figs[[1]]/figs[[2]]|((figs[[3]]/(figs[[4]]|figs[[5]]))/figs[[6]])+plot_layout(heights = c(0.8,0.8,1.5))|((figs[[7]]/figs[[8]]/figs[[9]])+plot_layout(heights = c(0.5,1,1)))
 
 
-
+svg("data/R/Figure1.svg")
 patchwork + plot_annotation(tag_levels = 'A',
                             title = 'Examples of brain visualizations made in R') &
   theme(plot.tag = element_text(face = 'bold'),
         plot.title = element_text(face="bold"))
+dev.off()
 
 
 
 ```
+
+```{r Figure2, eval=FALSE}
+
+library(patchwork)
+library(ggplot2)
+
+
+fig_name <- c('fig2a', 'fig2b', 'fig2c', 'fig2d', 'fig2e', 'fig2f')
+figs <- list()
+
+for (f in 1:length(fig_name)) { 
+  knitr::plot_crop(paste0('data/python/',fig_name[f],'.png'))
+  figs[[f]] <- ggplot() +
+    annotation_custom(grid::rasterGrob(png::readPNG(paste0('data/python/',fig_name[f],'.png')),
+                                       width=ggplot2::unit(1,"npc"),
+                                       height=ggplot2::unit(1,"npc")))
+}
+
+layoutA <- "
+AAAA
+#BB#
+CCCC
+"
+patchworkABC <- ((figs[[1]] + figs[[3]] + plot_layout(widths  = c(0.6,1))) / figs[[2]])  + plot_layout(heights = c(1,0.5)) 
+
+patchworkDEF <-  (figs[[4]] / figs[[5]] / figs[[6]] + plot_layout(design = layoutA, widths = c(0.2,1,0.2)))
+
+patchwork <- (patchworkABC| patchworkDEF)  + plot_layout(widths = c(1,0.6))
+
+#svg("data/R/Figure2.svg")
+patchwork + plot_annotation(tag_levels = 'A',
+                            title = 'Examples of brain visualizations made in Python') &
+  theme(plot.tag = element_text(face = 'bold'),
+        plot.title = element_text(face="bold"))
+#dev.off()
+
+```
+

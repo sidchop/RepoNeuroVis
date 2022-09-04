@@ -10,3 +10,4 @@ readme.Rmd
 *.sty
 *.Rproj
 manuscript_files
+*temp*

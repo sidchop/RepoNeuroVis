@@ -147,28 +147,7 @@ The following four sections provide brief examples of well documented and beginn
 
 ```{r Figure1, echo=FALSE, out.height = '80%', out.width = '80%', fig.align='center'}
 
-library(patchwork)
-library(ggplot2)
-
-
-fig_name <- c('fig1a', 'fig1b', 'fig1c', 'fig1d', 'fig1e', 'fig1f', 'fig1g', 'fig1h', 'fig1i')
-figs <- list()
-
-for (f in 1:length(fig_name)) { 
-  knitr::plot_crop(paste0('data/R/',fig_name[f],'.png'))
-  figs[[f]] <- ggplot() + annotation_custom(grid::rasterGrob(png::readPNG(paste0('data/R/',fig_name[f],'.png')),
-                                                             width=ggplot2::unit(1,"npc"),
-                                                             height=ggplot2::unit(1,"npc")))
-}
-
-patchwork <- figs[[1]]/figs[[2]]|((figs[[3]]/(figs[[4]]|figs[[5]]))/figs[[6]])+plot_layout(heights = c(0.8,0.8,1.5))|((figs[[7]]/figs[[8]]/figs[[9]])+plot_layout(heights = c(0.5,1,1)))
-
-
-
-patchwork + plot_annotation(tag_levels = 'A',
-                            title = 'Examples of brain visualizations made in R') &
-  theme(plot.tag = element_text(face = 'bold'),
-        plot.title = element_text(face="bold"))
+knitr::include_graphics("data/R/Figure1.svg")
 
 
 ```
@@ -184,44 +163,7 @@ patchwork + plot_annotation(tag_levels = 'A',
 
 ```{r Figure2, echo=FALSE, out.height = '80%', out.width = '80%', fig.align='center', eval=FALSE}
 
-library(patchwork)
-library(ggplot2)
-
-
-fig_name <- c('fig2a', 'fig2b', 'fig2c', 'fig2d', 'fig2e', 'fig2f')
-figs <- list()
-
-for (f in 1:length(fig_name)) { 
-  knitr::plot_crop(paste0('data/python/',fig_name[f],'.png'))
-  figs[[f]] <- ggplot() +
-    annotation_custom(grid::rasterGrob(png::readPNG(paste0('data/python/',fig_name[f],'.png')),
-                                       width=ggplot2::unit(1,"npc"),
-                                       height=ggplot2::unit(1,"npc")))
-}
-
-layoutA <- "
-AAAA
-#BB#
-CCCC
-"
-patchwork1 <- (((figs[[1]] + figs[[3]]) + plot_layout(widths  = c(0.8,1))) / figs[[2]])  + plot_layout(heights = c(1,0.5)) 
-patchwork1
-
-patchwork2 <-  (figs[[4]] / figs[[5]] / figs[[6]]) + plot_layout(design = layoutA, widths = c(0.2,1,0.2))
-
-(patchwork1 | patchwork2) + plot_layout(widths = c(1,0.6))
-
-patchwork2 <-  (figs[[4]] / figs[[5]] / figs[[6]] + plot_layout(design = layoutA, widths = c(0.2,1,0.2)))
-
-patchwork2 
-
-
-
-
-patchwork + plot_annotation(tag_levels = 'A',
-                            title = 'Examples of brain visualizations made in Python') &
-  theme(plot.tag = element_text(face = 'bold'),
-        plot.title = element_text(face="bold"))
+knitr::include_graphics("data/python/Figure2.pdf")
 
 
 ```
