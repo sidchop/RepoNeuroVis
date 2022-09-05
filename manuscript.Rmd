@@ -86,32 +86,32 @@ Neuroimaging data are often spatially 3D and can have multiple time points, addi
 **Table 1. Examples of code-based neuroimaging visualizations tools that can be accessed directly within R, MATLAB and Python environments.**
 
 |                                                        | Voxel   | Vertex  | ROI           | Edge    | Streamlines |
-|:------------------|:----------|:----------|:----------|:----------|:----------|
+|:------------|:-----------|:-----------|:-----------|:-----------|:-----------|
 | **R**                                                  |         |         |               |         |             |
 | [ANTsR](https://github.com/ANTsX/ANTsR)                | ***+*** | ***+*** | ***+***       |         |             |
 | [brainconn](https://github.com/sidchop/brainconn)      |         |         |               | ***+*** |             |
 | [brainR](https://github.com/muschellij2/brainR)        | ***+*** |         | ***+***       |         |             |
 | [ciftitools](https://github.com/mandymejia/ciftiTools) | ***+*** | ***+*** | ***+*****\*** |         |             |
 | [fsbrain](https://github.com/dfsp-spirit/fsbrain)      | ***+*** | ***+*** | ***+*****\*** |         |             |
-| ggseg                                                  |         |         | ***+***       |         |             |
-| neurobase                                              | ***+*** |         |               |         |             |
-| oro.nifti                                              | ***+*** |         |               |         |             |
+| [ggseg](https://github.com/ggseg/ggseg)                                                  |         |         | ***+***       |         |             |
+| [neurobase](https://github.com/muschellij2/neurobase)                                              | ***+*** |         |               |         |             |
+| [oro.nifti](https://github.com/muschellij2/oro.nifti)                                              | ***+*** |         |               |         |             |
 | **Python**                                             |         |         |               |         |             |
-| ANTsPy                                                 | ***+*** | ***+*** | ***+***       |         |             |
-| brainiak                                               | ***+*** |         |               |         |             |
-| Brainplotlib                                           |         | ***+*** | ***+*****\*** |         |             |
-| Brainspace/surfplot                                    |         | ***+*** | ***+*****\*** |         |             |
-| DIPY                                                   | ***+*** |         |               |         | ***+***     |
-| ENIGMA toolbox                                         |         |         | ***+***       |         |             |
-| FSLeyes                                                | ***+*** | ***+*** | ***+***       |         | *+*         |
-| ggseg                                                  |         |         | ***+***       |         |             |
-| graphpype                                              |         |         |               | ***+*** |             |
-| MMVT                                                   |         | ***+*** | ***+***       | ***+*** |             |
-| MNE                                                    | ***+*** | ***+*** | ***+***       |         |             |
-| mrivis                                                 | ***+*** |         |               |         |             |
-| NaNSlice                                               | ***+*** |         |               |         |             |
-| netneurotools                                          |         | ***+*** | ***+*****\*** |         |             |
-| nilearn                                                | ***+*** | ***+*** | ***+***       | ***+*** |             |
+| [ANTsPy](https://github.com/ANTsX/ANTsPy)                                                 | ***+*** | ***+*** | ***+***       |         |             |
+| [brainiak](https://github.com/brainiak/brainiak)                                               | ***+*** |         |               |         |             |
+| [Brainplotlib](https://github.com/feilong/brainplotlib)                                           |         | ***+*** | ***+*****\*** |         |             |
+| [Brainspace](https://github.com/MICA-MNI/BrainSpace)/[surfplot](https://github.com/danjgale/surfplot)                                    |         | ***+*** | ***+*****\*** |         |             |
+| [DIPY](https://github.com/dipy/dipy)                                                   | ***+*** |         |               |         | ***+***     |
+| [ENIGMA TOOLBOX](https://github.com/MICA-MNI/ENIGMA)                                         |         |         | ***+***       |         |             |
+| [FSLeyes](https://github.com/pauldmccarthy/fsleyes)                                                | ***+*** | ***+*** | ***+***       |         | *+*         |
+| [ggseg](https://github.com/ggseg/python-ggseg)                                                  |         |         | ***+***       |         |             |
+| [graphpype](https://neuropycon.github.io/graphpype/)                                              |         |         |               | ***+*** |             |
+| [MMVT](https://github.com/pelednoam/mmvt)                                                   |         | ***+*** | ***+***       | ***+*** |             |
+| [MNE](https://github.com/mne-tools/mne-python)                                                    | ***+*** | ***+*** | ***+***       |         |             |
+| [mrivis](https://github.com/raamana/mrivis)                                                 | ***+*** |         |               |         |             |
+| [NaNSlice](https://github.com/spinicist/nanslice)                                               | ***+*** |         |               |         |             |
+| [netneurotools](https://github.com/netneurolab/netneurotools)                                          |         | ***+*** | ***+*****\*** |         |             |
+| [nilearn](https://github.com/nilearn/nilearn)                                               | ***+*** | ***+*** | ***+***       | ***+*** |             |
 | niwidget                                               | ***+*** | ***+*** |               |         | ***+***     |
 | Pycortex                                               | ***+*** | ***+*** | ***+*****\*** |         |             |
 | pySurfer                                               |         | ***+*** | ***+*****\*** |         |             |
@@ -144,15 +144,24 @@ The following four sections provide brief examples of well documented and beginn
 \newpage
 \blandscape
 ```
+```{r Figure1, echo=FALSE, out.height = '70%', out.width = '80%', fig.align='center'}
 
-```{r Figure1, echo=FALSE, out.height = '80%', out.width = '80%', fig.align='center'}
-
-knitr::include_graphics("data/R/Figure1.svg")
+show_fig <- function(f)
+  {if (knitr::is_latex_output())
+  {
+    output = xfun::with_ext(f, 'pdf')
+    rsvg::rsvg_pdf(xfun::with_ext(f,'svg'), file=output)
+  } else {
+    output = xfun::with_ext(f, 'svg')
+  }
+  knitr::include_graphics(output)
+}
+show_fig("./data/R/Figure1.svg")
 
 
 ```
 
-*Figure 1. Examples of brain imaging visualization make in using different R packages.* A) Voxel-based statistical map threshold and overlaid over a T1-weighted template data, with a single axial slice shown. Made using the the `ortho2` function from the `neurobase` package. B) A voxel-level cortical parcellation overlaid on T1-weighted MRI data shown in 9-slice axial orientation. Made using the `overlay` function from the `neurobase` package. C) A CIFTI format surface ROI atlas with a corresponding statistic assigned to each regions, with both hemispheres displayed on a inflated template surface in lateral view. Made using the `view_xifti_surface` from the `ciftiTools` package. D) A coronal cross-sectional rendering of subcortical structures where a statistical value has been assigned to each region. Made using the `aseg` atlas from the `ggseg` package. E) A 3D rendering of 9 bilateral subcortical regions where a statistical value has been assigned to each region. Made using the `aseg` atlas from the `ggseg3d` package. F) Medial and lateral views of a ROI atlas displayed on inflated template cortical surface where a statistical value has been assigned to each region. Made using the `glasser` atlas from the `ggsegGlasser` package, which was plotted using `ggseg`. G) Lateral view of a CIFTI format vertex-level data displayed on a inflated template surface. Made using the `view_xifti_surface` function from the `ciftiTools` package. H) Medial and lateral views of vertex-level data displayed on a individuals white matter surface. Made using the `vis.subject.morph.standard` function from the `fsbrain` package. I) A weighted and undirected graph plotted on top, left and front views of a template of a brain rendering. Made using the `brainconn` function from the `brainconn` package. All code used to compile this figure, as well as the contents of each panel are provided in the Supplement.
+*Figure 1. Examples of brain imaging visualization make in using different R packages.* A) Voxel-based statistical map threshold and overlaid over a T1-weighted template data, with a single axial slice shown. Made using the the `ortho2` function from the `neurobase` package. B) A voxel-level cortical parcellation overlaid on T1-weighted MRI data shown in 9-slice axial orientation. Made using the `overlay` function from the `neurobase` package. C) A CIFTI format surface ROI atlas with a corresponding statistic assigned to each regions, with both hemispheres displayed on a inflated template surface in lateral view. Made using the `view_xifti_surface` from the `ciftiTools` package. D) A coronal cross-sectional rendering of subcortical structures where a statistical value has been assigned to each region. Made using the `aseg` atlas from the `ggseg` package. E) A 3D rendering of 9 bilateral subcortical regions where a statistical value has been assigned to each region. Made using the `aseg` atlas from the `ggseg3d` package. F) Medial and lateral views of a ROI atlas displayed on inflated template cortical surface where a statistical value has been assigned to each region. Made using the `glasser` atlas from the `ggsegGlasser` package, which was plotted using `ggseg`. G) Lateral view of a CIFTI format vertex-level data displayed on a inflated template surface. Made using the `view_xifti_surface` function from the `ciftiTools` package. H) Medial and lateral views of vertex-level data displayed on a individuals white matter surface. Made using the `vis.subject.morph.standard` function from the `fsbrain` package. I) A weighted and undirected graph plotted on top, left and front views of a template of a brain rendering. Made using the `brainconn` function from the `brainconn` package. All code used to compile this figure, as well as the contents of each panel are provided in an accompanying [online repository](https://github.com/sidchop/RepoNeuroVis).
 
 \elandscape
 
@@ -160,15 +169,11 @@ knitr::include_graphics("data/R/Figure1.svg")
 \newpage
 \blandscape
 ```
-
-```{r Figure2, echo=FALSE, out.height = '80%', out.width = '80%', fig.align='center', eval=FALSE}
-
-knitr::include_graphics("data/python/Figure2.pdf")
-
-
+```{r Figure2, echo=FALSE, out.height = '60%', out.width = '80%', fig.align='center', dev='cairo_pdf'}
+knitr::include_graphics("./data/python/Figure2.pdf")
 ```
 
-*Figure 1. Examples of brain imaging visualization make in using different Python packages.* A)
+*Figure 2. Examples of brain imaging visualization make in using different Python packages.* A) Voxel-based statistical map threshold and overlaid over a T1-weighted template data, with a single axial slice shown. Made using the `plotting.plot_stat_map` function from `nilearn`. B) Voxel-level cortical parcellation overlaid on T1-weighted MRI data shown on axial slices. Made using `plotting.plot_roi` function from `nilearn`. C) Medial and lateral views of an cortex-wide ROI atlas, displayed on an inflated template surface where a random value has been assigned to each ROI. Made using `Plot` function from `surfplot`. D) Lateral and medial views of vertex-level data displayed in a 3D rendering on an individual's white matter surface. Made using plotting.view_surf function in from `nilearn`. 3D rendering of 16 subcortical structures from the the Deiskan-Killiany atlas, where a random value has been assigned to each region. Made using the `plot_subcortical` function from the `ENIGMA TOOLBOX`.A weighted and undirected graph plotted on front, right, and top views of a schematic outline of a brain in standardized coordinate space. Made using plotting.plot_connectome function in `nilearn`.All code used to generate the contents of each panel, and compile this figure are provided in an accompanying [online repository](https://github.com/sidchop/RepoNeuroVis).
 
 \elandscape
 
@@ -225,4 +230,3 @@ Schäfer, T., & Ecker, C. (2020). fsbrain: an R package for the visualization of
 Chin, R., Chang, S. W., & Holmes, A. J. (2022). Beyond cortex: The evolution of the human brain. *Psychological Review*.
 
 \newpage
-
