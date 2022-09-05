@@ -1,4 +1,5 @@
-Reproducible and Programmatic Generation of Neuroimaging Visualizations
+Moving Towards Reproducible and Programmatic Generation of Neuroimaging
+Visualizations
 ================
 
 ## Reference
@@ -39,59 +40,59 @@ region-of-interest, and edge level data.
 
 ## Examples of code-based neuroimaging visualizations tools that can be accessed directly within R, MATLAB and Python environments.
 
-|                                                                                                       | Voxel   | Vertex  | ROI       | Edge    | Streamlines |
-|:------------------------------------------------------------------------------------------------------|:--------|:--------|:----------|:--------|:------------|
-| **R**                                                                                                 |         |         |           |         |             |
-| [ANTsR](https://github.com/ANTsX/ANTsR)                                                               | ***+*** | ***+*** | ***+***   |         |             |
-| [brainconn](https://github.com/sidchop/brainconn)                                                     |         |         |           | ***+*** |             |
-| [brainR](https://github.com/muschellij2/brainR)                                                       | ***+*** |         | ***+***   |         |             |
-| [ciftitools](https://github.com/mandymejia/ciftiTools)                                                | ***+*** | ***+*** | ***+*\*** |         |             |
-| [fsbrain](https://github.com/dfsp-spirit/fsbrain)                                                     | ***+*** | ***+*** | ***+*\*** |         |             |
-| [ggseg](https://github.com/ggseg/ggseg)                                                               |         |         | ***+***   |         |             |
-| [neurobase](https://github.com/muschellij2/neurobase)                                                 | ***+*** |         |           |         |             |
-| [oro.nifti](https://github.com/muschellij2/oro.nifti)                                                 | ***+*** |         |           |         |             |
-| **Python**                                                                                            |         |         |           |         |             |
-| [ANTsPy](https://github.com/ANTsX/ANTsPy)                                                             | ***+*** | ***+*** | ***+***   |         |             |
-| [brainiak](https://github.com/brainiak/brainiak)                                                      | ***+*** |         |           |         |             |
-| [Brainplotlib](https://github.com/feilong/brainplotlib)                                               |         | ***+*** | ***+*\*** |         |             |
-| [Brainspace](https://github.com/MICA-MNI/BrainSpace)/[surfplot](https://github.com/danjgale/surfplot) |         | ***+*** | ***+*\*** |         |             |
-| [DIPY](https://github.com/dipy/dipy)                                                                  | ***+*** |         |           |         | ***+***     |
-| [ENIGMA TOOLBOX](https://github.com/MICA-MNI/ENIGMA)                                                  |         |         | ***+***   |         |             |
-| [FSLeyes](https://github.com/pauldmccarthy/fsleyes)                                                   | ***+*** | ***+*** | ***+***   |         | *+*         |
-| [ggseg](https://github.com/ggseg/python-ggseg)                                                        |         |         | ***+***   |         |             |
-| [graphpype](https://neuropycon.github.io/graphpype/)                                                  |         |         |           | ***+*** |             |
-| [MMVT](https://github.com/pelednoam/mmvt)                                                             |         | ***+*** | ***+***   | ***+*** |             |
-| [MNE](https://github.com/mne-tools/mne-python)                                                        | ***+*** | ***+*** | ***+***   |         |             |
-| [mrivis](https://github.com/raamana/mrivis)                                                           | ***+*** |         |           |         |             |
-| [NaNSlice](https://github.com/spinicist/nanslice)                                                     | ***+*** |         |           |         |             |
-| [netneurotools](https://github.com/netneurolab/netneurotools)                                         |         | ***+*** | ***+*\*** |         |             |
-| [nilearn](https://github.com/nilearn/nilearn)                                                         | ***+*** | ***+*** | ***+***   | ***+*** |             |
-| niwidget                                                                                              | ***+*** | ***+*** |           |         | ***+***     |
-| Pycortex                                                                                              | ***+*** | ***+*** | ***+*\*** |         |             |
-| pySurfer                                                                                              |         | ***+*** | ***+*\*** |         |             |
-| surfice                                                                                               | ***+*** | ***+*** | ***+***   | ***+*** | ***+***     |
-| surfplot                                                                                              |         | ***+*** | ***+***   |         |             |
-| Visbrain                                                                                              | ***+*** | ***+*** | ***+***   | ***+*** |             |
-| **MATLAB**                                                                                            |         |         |           |         |             |
-| BrainNetViewer                                                                                        | ***+*** |         | ***+***   | ***+*** |             |
-| Brainspace                                                                                            |         | ***+*** | ***+*\*** |         |             |
-| Brainstorm                                                                                            | ***+*** | ***+*** | ***+***   |         |             |
-| bspmview                                                                                              | ***+*** |         | ***+***   |         |             |
-| CandlabCore                                                                                           | ***+*** |         | ***+***   |         |             |
-| ECoG/fMRI Vis toolbox                                                                                 |         | ***+*** | ***+*\*** |         |             |
-| ENIGMA toolbox                                                                                        |         |         | ***+***   |         |             |
-| FieldTrip                                                                                             | ***+*** | ***+*** |           |         |             |
-| Lead-DBS                                                                                              | ***+*** |         | ***+***   |         |             |
-| mni2fs                                                                                                |         | ***+*** |           |         |             |
-| mrtools                                                                                               | ***+*** | ***+*** | ***+*\*** |         |             |
-| plotSurfaceROIBoundary                                                                                |         | ***+*** | ***+*\*** |         |             |
-| Vistasoft                                                                                             | ***+*** | ***+*** | ***+***   |         | ***+***     |
+|                                                                                                         | Voxel   | Vertex  | ROI       | Edge    | Streamlines |
+|:--------------------------------------------------------------------------------------------------------|:--------|:--------|:----------|:--------|:------------|
+| **R**                                                                                                   |         |         |           |         |             |
+|   [ANTsR](https://github.com/ANTsX/ANTsR)                                                               | ***+*** | ***+*** | ***+***   |         |             |
+|   [brainconn](https://github.com/sidchop/brainconn)                                                     |         |         |           | ***+*** |             |
+|   [brainR](https://github.com/muschellij2/brainR)                                                       | ***+*** |         | ***+***   |         |             |
+|   [ciftitools](https://github.com/mandymejia/ciftiTools)                                                | ***+*** | ***+*** | ***+*\*** |         |             |
+|   [fsbrain](https://github.com/dfsp-spirit/fsbrain)                                                     | ***+*** | ***+*** | ***+*\*** |         |             |
+|   [ggseg](https://github.com/ggseg/ggseg)                                                               |         |         | ***+***   |         |             |
+|   [neurobase](https://github.com/muschellij2/neurobase)                                                 | ***+*** |         |           |         |             |
+|   [oro.nifti](https://github.com/muschellij2/oro.nifti)                                                 | ***+*** |         |           |         |             |
+| **Python**                                                                                              |         |         |           |         |             |
+|   [ANTsPy](https://github.com/ANTsX/ANTsPy)                                                             | ***+*** | ***+*** | ***+***   |         |             |
+|   [brainiak](https://github.com/brainiak/brainiak)                                                      | ***+*** |         |           |         |             |
+|   [Brainplotlib](https://github.com/feilong/brainplotlib)                                               |         | ***+*** | ***+*\*** |         |             |
+|   [Brainspace](https://github.com/MICA-MNI/BrainSpace)/[surfplot](https://github.com/danjgale/surfplot) |         | ***+*** | ***+*\*** |         |             |
+|   [DIPY](https://github.com/dipy/dipy)                                                                  | ***+*** |         |           |         | ***+***     |
+|   [ENIGMA TOOLBOX](https://github.com/MICA-MNI/ENIGMA)                                                  |         |         | ***+***   |         |             |
+|   [FSLeyes](https://github.com/pauldmccarthy/fsleyes)                                                   | ***+*** | ***+*** | ***+***   |         | *+*         |
+|   [ggseg](https://github.com/ggseg/python-ggseg)                                                        |         |         | ***+***   |         |             |
+|   [graphpype](https://neuropycon.github.io/graphpype/)                                                  |         |         |           | ***+*** |             |
+|   [MMVT](https://github.com/pelednoam/mmvt)                                                             |         | ***+*** | ***+***   | ***+*** |             |
+|   [MNE](https://github.com/mne-tools/mne-python)                                                        | ***+*** | ***+*** | ***+***   |         |             |
+|   [mrivis](https://github.com/raamana/mrivis)                                                           | ***+*** |         |           |         |             |
+|   [NaNSlice](https://github.com/spinicist/nanslice)                                                     | ***+*** |         |           |         |             |
+|   [netneurotools](https://github.com/netneurolab/netneurotools)                                         |         | ***+*** | ***+*\*** |         |             |
+|   [netplotbrain](https://github.com/wiheto/netplotbrain)                                                |         |         | ***+***   | ***+*** |             |
+|   [nilearn](https://github.com/nilearn/nilearn)                                                         | ***+*** | ***+*** | ***+***   | ***+*** |             |
+|   [niwidget](https://github.com/nipy/niwidgets)                                                         | ***+*** | ***+*** |           |         | ***+***     |
+|   [Pycortex](https://github.com/gallantlab/pycortex)                                                    | ***+*** | ***+*** | ***+*\*** |         |             |
+|   [pySurfer](https://pysurfer.github.io/)                                                               |         | ***+*** | ***+*\*** |         |             |
+|   [surfice](https://github.com/neurolabusc/surf-ice)                                                    | ***+*** | ***+*** | ***+***   | ***+*** | ***+***     |
+|   [Visbrain](https://github.com/EtienneCmb/visbrain)                                                    | ***+*** | ***+*** | ***+***   | ***+*** |             |
+| **MATLAB**                                                                                              |         |         |           |         |             |
+|   [BrainNetViewer](https://www.nitrc.org/projects/bnv/)                                                 | ***+*** |         | ***+***   | ***+*** |             |
+|   [Brainspace](https://github.com/MICA-MNI/BrainSpace)                                                  |         | ***+*** | ***+*\*** |         |             |
+|   [Brainstorm](https://github.com/brainstorm-tools/brainstorm3)                                         | ***+*** | ***+*** | ***+***   |         |             |
+|   [bspmview](https://www.bobspunt.com/software/bspmview/)                                               | ***+*** |         | ***+***   |         |             |
+|   [CandlabCore](https://github.com/canlab/CanlabCore)                                                   | ***+*** |         | ***+***   |         |             |
+|   [ECoG/fMRI Vis toolbox](https://github.com/Immiora/matlab-ecog-visualization)                         |         | ***+*** | ***+*\*** |         |             |
+|   [ENIGMA TOOLBOX](https://github.com/MICA-MNI/ENIGMA)                                                  |         |         | ***+***   |         |             |
+|   [FieldTrip](https://www.fieldtriptoolbox.org/)                                                        | ***+*** | ***+*** |           |         |             |
+|   [Lead-DBS](https://www.lead-dbs.org/)                                                                 | ***+*** |         | ***+***   |         |             |
+|   [mni2fs](https://github.com/dprice80/mni2fs)                                                          |         | ***+*** |           |         |             |
+|   [mrtools](https://github.com/justingardner/mrTools)                                                   | ***+*** | ***+*** | ***+*\*** |         |             |
+|   [plotSurfaceROIBoundary](https://github.com/StuartJO/plotSurfaceROIBoundary)                          |         | ***+*** | ***+*\*** |         |             |
+|   [Vistasoft](https://github.com/vistalab/vistasoft)                                                    | ***+*** | ***+*** | ***+***   |         | ***+***     |
 
 Note: The tools listed contain functionality required to generate (at
 least close-to) publication-ready neuroimaging figures via user-entered
 code within R, MATLAB and Python environments. This list does not
 include cross-platform general purpose visualization software.  
-***\****Cortex only
+***\**** Cortex only
 
 ------------------------------------------------------------------------
 
