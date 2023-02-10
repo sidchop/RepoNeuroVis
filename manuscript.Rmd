@@ -33,12 +33,12 @@ keywords:
   - Brain Visualization
 abstract: Neuroimaging visualizations form the centerpiece of the interpretation and communication of scientific results, and are also a cornerstone for data quality control. Often, these images and figures are produced by manually changing settings on Graphical User Interfaces (GUIs). There now exist many well-documented code-based brain visualization tools that allow users to programmatically generate publication-ready figures directly within R, Python and MATLAB environments. Here, we provide a rationale for the wide-spread adoption of code-generated brain visualizations by highlighting corresponding advantages in replicability, flexibility, and integration over GUI based tools. We then provide a practical guide outlining the steps required to generate these code-based brain visualizations. We also present a comprehensive table of tools currently available for programmatic brain visualizations and provide didactic examples of visualizations and associated code as a point of reference. Finally, we provide a web-app (https://sidchop.shinyapps.io/braincode/) which can generate simple code-templates as starting points for these visualizations.
 output: 
+  bookdown::word_document2:
+    toc: false
   bookdown::pdf_book:
     base_format: rticles::arxiv_article
     keep_tex: true
     latex_engine: lualatex
-  bookdown::word_document2:
-    toc: false
 linestretch: 1.5
 geometry: "left=1.5cm, right=1.5cm, top=1.5cm, bottom=1.5cm"
 header-includes:
