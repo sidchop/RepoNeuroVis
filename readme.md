@@ -1,11 +1,11 @@
-Moving Towards Reproducible and Programmatic Generation of Neuroimaging
-Visualizations
+A Practical Guide for Generating Reproducible and Programmatic
+Neuroimaging Visualizations
 ================
 
 ## Reference
 
-**Chopra, S.**, Labache, L., Dhamala, E., Orchard, E., Holmes. A. [A
-Practical Guide for Generating Reproducible and Programmatic
+**Chopra, Sidhant.**, Labache, L., Dhamala, E., Orchard, E., Holmes. A.
+[A Practical Guide for Generating Reproducible and Programmatic
 Neuroimaging
 Visualizations](https://github.com/sidchop/RepoNeuroVis/blob/main/manuscript.pdf).
 
@@ -109,11 +109,11 @@ meet this criteria).
 
 ## Examples of figures made in R:  
 
-<img src="data/readme_figures/fig1.png" width="50%" />
+<img src="data/readme_figures/fig1.png" width="70%" style="display: block; margin: auto;" />
 
 ## Examples of figures made in Python: 
 
-<img src="data/readme_figures/fig2.png" width="50%" />
+<img src="data/readme_figures/fig2.png" width="70%" style="display: block; margin: auto;" />
 
 ## Questions
 
