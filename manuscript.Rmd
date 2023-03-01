@@ -181,7 +181,7 @@ An important consideration when selecting a tool can be whether it can generate 
 **Table1 Examples of code-based neuroimaging visualizations tools that can be accessed directly within R, MATLAB and Python environments.**
 
 |                                                                                                                 | Voxel               | Vertex             | ROI                   | Edge             | Streamlines    |
-|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|
+|:----------------------------------------------------------------------------------------------------------------|:--------------------|:-------------------|:----------------------|:-----------------|:---------------|
 | **R**                                                                                                           |                     |                    |                       |                  |                |
 |   [ANTsR](https://antsx.github.io/ANTsR/articles/ANTsR.html)                                                    | ***+^2^***          | ***+^2^***         | ***+^2^***            | ***+^1^***       |                |
 |   [brainconn](https://github.com/sidchop/brainconn)                                                             |                     |                    |                       | ***+^1^***       |                |
