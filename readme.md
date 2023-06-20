@@ -36,7 +36,7 @@ To assists researchers in finding a code-based brain visualization tool,
 we have provided a interactive table:
 <https://sidchop.shinyapps.io/braincode_selector/>. If you think that we
 have missed a code-based package/library or tool box which can generate
-brain visualization directly witin in R, python or MATLAB environments,
+brain visualization directly within in R, python or MATLAB environments,
 please [creating an issue on this GitHub
 page](https://github.com/sidchop/RepoNeuroVis/issues) or leave a comment
 on this [google
@@ -65,18 +65,40 @@ explore and fine-tune additional visualization options within their own
 programming environment. The code-template also contains links and
 prompts to more detailed documentation, alternate packages/libraries and
 tutorials which allow for more complex and publication-ready brain
-visualizations. **Note:** This web-app is still under development, so
-some features are a little slow and we are working on the UI. Please
-feel free to leave feedback by [creating an issue on this GitHub
+visualizations. If the web-app
+(<https://sidchop.shinyapps.io/braincode/>) becomes unavailable, bundled
+version can be downloaded and executed locally using R or Python using
+the following links:
+
+- R template generator (Shiny for R app:
+  <https://figshare.com/articles/software/braincodeR_tar/23537313>)
+- Python template generator (Shiny for python app:
+  <https://figshare.com/articles/software/braincodePy_tar/23537319>)
+- Interactive tool selector (Shiny for R app:
+  <https://figshare.com/articles/software/braincode_table_selector_tar/23537316>)
+
+**Note:** This web-app is still being refined, so some features are a
+little slow and we are working on the UI. Please feel free to leave
+feedback by [creating an issue on this GitHub
 page](https://github.com/sidchop/RepoNeuroVis/issues).
 
-## <img src="images/image-17223477.png" width="100%" height="70%" style="display: block; margin: auto;" />
+<img src="images/image-17223477.png" width="100%" height="70%" style="display: block; margin: auto;" />
+
+Interface for BrainCode web-app which generates simple code-based
+templates for brain visualizations. **(1)** Select your programming
+environment (R or Python). **(2)** Select your visualization type
+(Voxel, Region, Vertex and Edge). **(3)** Manually adjust limited
+visualization settings and examine how it reactively changes the
+visualization **(4)** and code template **(5)**. **(5)** Copy the code
+template into your programming environment, change file-paths to your
+own data and explore other visualization settings offered by the
+functions.
 
 ## Examples of figures made within R and Python:  
 
 <img src="data/readme_figures/fig1.png" width="70%" style="display: block; margin: auto;" />
 
-## Examples of figures made in Python: 
+## Examples of figures made in Python:
 
 <img src="data/readme_figures/fig2.png" width="70%" style="display: block; margin: auto;" />
 
